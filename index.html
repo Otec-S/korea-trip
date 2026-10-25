@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Корея 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600&family=Noto+Serif+KR:wght@600;800&family=Unbounded:wght@500;700&display=swap">
+<style>
+/* Concept: a journey thread from Seoul down to Busan and back. Each city owns one colour taken from the Korean five-direction palette (blue, gold, jade, red). */
+:root {
+  --bg: #eef1f6;
+  --card: #f9fafc;
+  --fg: #141a2b;
+  --mute: #566078;
+  --line: #d3d9e4;
+  --sun: #f2b134;
+  --seoul: #2b4a9e;
+  --gyeongju: #c98a0b;
+  --ulsan: #1f7a64;
+  --busan: #d0422f;
+  --on-seoul: #ffffff;
+  --on-gyeongju: #1b1300;
+  --on-ulsan: #ffffff;
+  --on-busan: #ffffff;
+  --f-display: "Unbounded", "Golos Text", system-ui, sans-serif;
+  --f-body: "Golos Text", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-ko: "Noto Serif KR", "Apple SD Gothic Neo", "Malgun Gothic", serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #10131c; --card: #171b27; --fg: #e8eaf0; --mute: #9aa1b5; --line: #2a3040; --sun: #f6c65a;
+    --seoul: #7b9bf0; --gyeongju: #e8b84a; --ulsan: #4cc1a2; --busan: #f2705c;
+    --on-seoul: #0e1220; --on-gyeongju: #0e1220; --on-ulsan: #0e1220; --on-busan: #0e1220;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #10131c; --card: #171b27; --fg: #e8eaf0; --mute: #9aa1b5; --line: #2a3040; --sun: #f6c65a;
+  --seoul: #7b9bf0; --gyeongju: #e8b84a; --ulsan: #4cc1a2; --busan: #f2705c;
+  --on-seoul: #0e1220; --on-gyeongju: #0e1220; --on-ulsan: #0e1220; --on-busan: #0e1220;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--f-body);
+  font-size: 16px;
+  line-height: 1.55;
+  padding-block: 0 56px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+a { color: inherit; }
+a:focus-visible { outline: 2px solid var(--fg); outline-offset: 3px; border-radius: 3px; }
+.wrap { max-width: 1060px; margin-inline: auto; }
+h1, h2, h3 { text-wrap: balance; margin: 0; }
+p { margin: 0; }
+
+/* hero */
+.hero { padding-block: 48px 36px; position: relative; overflow: hidden; }
+.hero .ghost {
+  position: absolute; right: -4px; top: 6px; font-family: var(--f-ko); font-weight: 800;
+  font-size: clamp(110px, 24vw, 240px); line-height: 1; color: var(--fg); opacity: .06; pointer-events: none; user-select: none;
+}
+.eyebrow { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--mute); font-weight: 600; }
+.hero h1 { font-family: var(--f-display); font-weight: 700; font-size: clamp(34px, 7vw, 68px); line-height: 1.05; margin-top: 14px; max-width: 14ch; }
+.hero .sub { margin-top: 18px; font-size: 18px; max-width: 52ch; color: var(--mute); }
+.hero .sub b { color: var(--fg); font-weight: 600; }
+.facts { display: flex; flex-wrap: wrap; gap: 10px 28px; margin-top: 26px; }
+.fact { min-width: 0; }
+.fact .k { font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--mute); }
+.fact .v { font-family: var(--f-display); font-weight: 500; font-size: 20px; font-variant-numeric: tabular-nums; }
+
+/* nights bar */
+.bar { display: grid; grid-template-columns: 5fr 2fr 1fr 5fr 2fr; gap: 3px; margin-top: 34px; height: 16px; }
+.bar i { display: block; border-radius: 2px; }
+.legend { display: flex; flex-wrap: wrap; gap: 8px 22px; margin-top: 14px; padding: 0; list-style: none; font-size: 14px; }
+.legend li { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.legend .sw { width: 12px; height: 12px; border-radius: 2px; flex: none; }
+.legend span.n { color: var(--mute); font-variant-numeric: tabular-nums; }
+.c-seoul { background: var(--seoul); } .c-gj { background: var(--gyeongju); } .c-ul { background: var(--ulsan); } .c-bs { background: var(--busan); }
+
+nav.jump { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 26px; }
+nav.jump a {
+  text-decoration: none; font-size: 14px; font-weight: 500; padding: 8px 14px; border-radius: 999px;
+  border: 1px solid var(--line); background: var(--card);
+}
+nav.jump a:hover { border-color: var(--fg); }
+
+/* flights strip */
+.flights { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; margin-top: 8px; }
+.flight { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 16px 18px; min-width: 0; }
+.flight .route { font-family: var(--f-display); font-weight: 500; font-size: 20px; }
+.flight .meta { color: var(--mute); font-size: 14px; margin-top: 4px; font-variant-numeric: tabular-nums; }
+.flight .tag { font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--mute); font-weight: 600; }
+
+/* city sections */
+.city { margin-top: 72px; --city: var(--seoul); --on: var(--on-seoul); }
+.city.gj { --city: var(--gyeongju); --on: var(--on-gyeongju); }
+.city.ul { --city: var(--ulsan); --on: var(--on-ulsan); }
+.city.bs { --city: var(--busan); --on: var(--on-busan); }
+.city-top { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; align-items: center; }
+.city.flip .city-top .scene { order: -1; }
+.when { display: inline-block; font-size: 13px; font-weight: 600; letter-spacing: .06em; padding: 6px 12px; border-radius: 4px; background: var(--city); color: var(--on); font-variant-numeric: tabular-nums; }
+.city h2 { font-family: var(--f-display); font-weight: 700; font-size: clamp(32px, 5.4vw, 52px); line-height: 1.05; margin-top: 16px; }
+.city h2 .ko { display: block; font-family: var(--f-ko); font-weight: 600; font-size: .5em; color: var(--city); margin-top: 8px; letter-spacing: .04em; }
+.lede { margin-top: 16px; font-size: 17px; color: var(--mute); max-width: 46ch; }
+.scene { margin: 0; min-width: 0; --sky: color-mix(in srgb, var(--city) 18%, var(--bg)); --m1: color-mix(in srgb, var(--city) 34%, var(--bg)); --m2: color-mix(in srgb, var(--city) 60%, var(--bg)); --art: color-mix(in srgb, var(--city) 38%, var(--fg)); --wall: color-mix(in srgb, var(--city) 10%, var(--bg)); }
+.scene svg { display: block; width: 100%; height: auto; border-radius: 10px; }
+.scene figcaption { font-size: 12px; color: var(--mute); margin-top: 8px; }
+.sky { fill: var(--sky); } .sunf { fill: var(--sun); } .m1 { fill: var(--m1); } .m2 { fill: var(--m2); }
+.art { fill: var(--art); } .wall { fill: var(--wall); }
+.artl { stroke: var(--art); fill: none; stroke-width: 3; stroke-linecap: round; }
+.skyf { fill: var(--sky); }
+
+.stay { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px 32px; margin-top: 28px; padding-block: 18px; border-block: 1px solid var(--line); }
+.stay div { min-width: 0; }
+.stay .k { font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--mute); font-weight: 600; }
+.stay .v { margin-top: 2px; font-weight: 500; }
+
+.places { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 14px; margin-top: 22px; }
+.place { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 18px; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.place .tag { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; font-weight: 600; color: var(--mute); }
+.place h3 { font-size: 19px; line-height: 1.2; font-weight: 600; }
+.place .ko { font-family: var(--f-ko); font-weight: 600; font-size: 14px; color: var(--city); }
+.place p { font-size: 15px; color: var(--mute); }
+.place .tip { font-size: 13px; color: var(--fg); border-top: 1px dashed var(--line); padding-top: 8px; margin-top: auto; }
+.place a.photo { font-size: 13px; font-weight: 600; text-decoration: none; border-bottom: 2px solid var(--city); align-self: flex-start; padding-bottom: 1px; }
+.place a.photo:hover { border-bottom-color: var(--fg); }
+
+.next { margin-top: 18px; font-size: 14px; color: var(--mute); }
+.next b { color: var(--fg); font-weight: 600; }
+
+
+.place { overflow: hidden; }
+.place .ph { display: block; width: calc(100% + 36px); max-width: none; margin: -18px -18px 4px; aspect-ratio: 3 / 2; object-fit: cover; background: var(--line); }
+.credits { margin-top: 14px; font-size: 12px; line-height: 1.5; }
+.credits summary { cursor: pointer; font-weight: 600; }
+.credits ul { margin: 8px 0 0; padding-left: 18px; }
+.credits li { margin-bottom: 3px; }
+
+
+.scene img.cityph { display: block; width: 100%; height: auto; aspect-ratio: 16 / 11; object-fit: cover; border-radius: 10px; background: var(--line); }
+
+.sub { font-family: var(--f-display); font-weight: 500; font-size: 18px; margin-top: 28px; }
+.days { display: grid; gap: 12px; margin-top: 14px; }
+.day { display: grid; grid-template-columns: 84px minmax(0, 1fr); background: var(--card); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+.dh { background: var(--city); color: var(--on); display: flex; flex-direction: column; align-items: center; justify-content: flex-start; padding: 14px 6px; gap: 2px; }
+.dd { font-family: var(--f-display); font-weight: 700; font-size: 32px; line-height: 1; font-variant-numeric: tabular-nums; }
+.dm { font-size: 12px; font-weight: 600; letter-spacing: .04em; text-align: center; }
+.db { padding: 14px 18px 16px; min-width: 0; }
+.db h3 { font-size: 18px; font-weight: 600; line-height: 1.25; }
+.db ul { margin: 10px 0 0; padding-left: 18px; display: grid; gap: 8px; font-size: 15px; color: var(--mute); }
+.db li b { color: var(--fg); font-weight: 600; font-variant-numeric: tabular-nums; }
+.db li b::after { content: " ·"; color: var(--mute); font-weight: 400; }
+.db .night { margin-top: 12px; padding-top: 10px; border-top: 1px dashed var(--line); font-size: 14px; font-weight: 500; }
+.db .night span { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--mute); font-weight: 600; margin-right: 6px; }
+@media (max-width: 560px) { .day { grid-template-columns: 1fr; } .dh { flex-direction: row; justify-content: flex-start; align-items: baseline; padding: 10px 16px; gap: 10px; } }
+.dplaces { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 12px; margin-top: 14px; }
+.dplaces .place { background: var(--bg); }
+
+footer { margin-top: 72px; padding-top: 20px; border-top: 1px solid var(--line); font-size: 13px; color: var(--mute); }
+
+@media (max-width: 760px) {
+  .city-top { grid-template-columns: 1fr; gap: 20px; }
+  .city.flip .city-top .scene { order: 0; }
+  .city { margin-top: 56px; }
+  .hero { padding-top: 36px; }
+}
+html{color-scheme:light} img{max-width:100%} body{margin:0}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="hero">
+    <div class="ghost" aria-hidden="true">한국</div>
+    <div class="eyebrow">Сергей и Ирина · Южная Корея</div>
+    <h1>Корея. Осень 2026</h1>
+    <p class="sub">Шестнадцать дней с <b>28 октября по 12 ноября</b>: дворцы Сеула, древний Кёнджу, бамбук Ульсана и море Пусана. Ниже маршрут расписан по дням.</p>
+    <div class="facts">
+      <div class="fact"><div class="k">Вылет из Ташкента</div><div class="v">27 окт · 22:30</div></div>
+      <div class="fact"><div class="k">Прилёт в Инчхон</div><div class="v">28 окт · 08:40</div></div>
+      <div class="fact"><div class="k">Обратно</div><div class="v">12 ноя · 10:00</div></div>
+      <div class="fact"><div class="k">До вылета</div><div class="v" id="left">скоро</div></div>
+    </div>
+    <div class="bar" aria-hidden="true"><i class="c-seoul"></i><i class="c-gj"></i><i class="c-ul"></i><i class="c-bs"></i><i class="c-seoul"></i></div>
+    <ul class="legend" aria-label="Ночи по городам">
+      <li><span class="sw c-seoul"></span>Сеул <span class="n">5 ночей</span></li>
+      <li><span class="sw c-gj"></span>Кёнджу <span class="n">2 ночи</span></li>
+      <li><span class="sw c-ul"></span>Ульсан <span class="n">1 ночь</span></li>
+      <li><span class="sw c-bs"></span>Пусан <span class="n">5 ночей</span></li>
+      <li><span class="sw c-seoul"></span>Сеул <span class="n">1 ночь + 1 в Инчхоне</span></li>
+    </ul>
+    <nav class="jump" aria-label="Города маршрута">
+      <a href="#seoul">Сеул</a><a href="#gyeongju">Кёнджу</a><a href="#ulsan">Ульсан</a><a href="#busan">Пусан</a><a href="#finish">10–12 ноября</a>
+    </nav>
+  </header>
+
+  <section aria-label="Перелёты">
+    <div class="flights">
+      <div class="flight"><div class="tag">Туда · HY511</div><div class="route">Ташкент → Сеул Инчхон</div><div class="meta">27 окт 22:30 → 28 окт 08:40 · терминал 1 в Инчхоне · 6 ч 10 мин</div></div>
+      <div class="flight"><div class="tag">Обратно · HY514</div><div class="route">Сеул Инчхон → Ташкент</div><div class="meta">12 ноя 10:00 → 13:10 · регистрация закрывается в 09:00 · 7 ч 10 мин</div></div>
+    </div>
+  </section>
+
+  <!-- SEOUL -->
+  <section class="city" id="seoul">
+    <div class="city-top">
+      <div>
+        <span class="when">28 окт — 2 нояб · 5 ночей</span>
+        <h2>Сеул<span class="ko">서울</span></h2>
+        <p class="lede">Королевские дворцы рядом с небоскрёбами. Живём в Инсадоне, откуда пешком можно дойти до главных мест.</p>
+      </div>
+      <figure class="scene"><img class="cityph" alt="Сеул" src="assets/city-1.jpg"><figcaption>Фото: Flickr - Laurie Nevay https://www.flickr.com/photos/lauriene, CC BY-SA 2.0</figcaption></figure>
+    </div>
+
+    <div class="stay"><div><div class="k">Где живём</div><div class="v">Hotel Jak Insadong by Anook, Инсадон, Чонно-гу · 28 окт — 2 нояб</div></div><div><div class="k">Дальше</div><div class="v">2 ноября KTX в 10:58 до станции Singyeongju, прибытие в 13:06</div></div></div><h3 class="sub">План и места по дням</h3><div class="days"><article class="day"><div class="dh"><span class="dd">28</span><span class="dm">окт · ср</span></div><div class="db"><h3>Прилёт и Инсадон</h3><ul><li><b>08:40</b> Прилёт в Инчхон, терминал 1. Купите карту T-money: пополнить её можно только наличными, поэтому обменяйте немного денег прямо в аэропорту.</li><li>В отель, на выбор: экспресс AREX до Seoul Station, затем метро линии 1 до станции Чонгак (выход 3-1) и 5–10 минут пешком. Или автобус-лимузин №6002 до остановки Чонно 3-га (JONGNO 3-GA), оттуда 7–10 минут пешком. У станции Ангук 6002 не останавливается. Билеты на AREX и автобус можно взять в кассе или автомате аэропорта по карте.</li><li><b>до 15:00</b> Оставляем чемоданы и гуляем: деревня ханоков Иксон-дон с узкими улочками и кафе, пешеходная арт-улица Инсадон, ручей Чхонгечхон (10 минут пешком).</li></ul><div class="dplaces"><article class="place"><img class="ph" loading="lazy" alt="Иксон-дон" src="assets/place-01.jpg"><span class="tag">Квартал</span><h3>Иксон-дон</h3><span class="ko">익선동</span><p>Переулки с низкими ханоками, в которых теперь кафе и рестораны. Находится рядом с отелем.</p><a class="photo" href="https://www.google.com/search?tbm=isch&q=Ikseon-dong+hanok+street" target="_blank" rel="noopener">Фото ↗</a></article><article class="place"><img class="ph" loading="lazy" alt="Инсадон" src="assets/place-02.jpg"><span class="tag">Арт-улица</span><h3>Инсадон</h3><span class="ko">인사동</span><p>Пешеходная улица галерей, чайных домов и лавок с традиционными сувенирами.</p><a class="photo" href="https://www.google.com/search?tbm=isch&q=Insadong+street+Seoul" target="_blank" rel="noopener">Фото ↗</a></article><article class="place"><img class="ph" loading="lazy" alt="Чхонгечхон" src="assets/place-03.jpg"><span class="tag">Прогулка</span><h3>Чхонгечхон</h3><span class="ko">청계천</span><p>Ручей, проложенный через центр города между небоскрёбами. Хорошо гулять вечером.</p><a class="photo" href="https://www.google.com/search?tbm=isch&q=Cheonggyecheon+stream+Seoul" target="_blank" rel="noopener">Фото ↗</a></article></div><p class="night"><span>Ночуем</span> Hotel Jak Insadong by Anook · 인사동14길 48</p></div></article><article class="day"><div class="dh"><span class="dd">29</span><span class="dm">окт · чт</span></div><div class="db"><h3>Два дворца</h3><ul><li><b>к 10:00</b> Дворец Кёнбоккун и павильон Кёнхверу на воде. Смена караула в 10:00 и в 14:00. От отеля около 20 минут пешком.</li><li><b>днём</b> Дворец Чхандоккун, 20 минут пешком от Кёнбоккуна. Клёны и гинкго в разгаре осени.</li><li><b>вечером</b> Прогулка по Самчхон-дону: галереи и кофейни.</li></ul><div class="dplaces"><article class="place"><img class="ph" loading="lazy" alt="Самчхон-дон" src="assets/place-04.jpg"><span class="tag">Район</span><h3>Самчхон-дон</h3><span class="ko">삼청동</span><p>Тихая улица между дворцами с галереями, мастерскими и кофейнями.</p><a class="photo" href="https://www.google.com/search?tbm=isch&q=Samcheong-dong+Seoul" target="_blank" rel="noopener">Фото ↗</a></article><article class="place"><img class="ph" loading="lazy" alt="Кёнбоккун" src="assets/place-05.jpg"><span class="tag">Дворец</span><h3>Кёнбоккун</h3><span class="ko">경복궁</span>
+        <p>Главный дворец династии Чосон, основан в 1395 году. У ворот Кванхвамун проходит церемония смены караула.</p>
+        <p class="tip">Закрыт по вторникам. В ханбоке вход бесплатный.</p>
+        <a class="photo" href="https://www.google.com/search?tbm=isch&q=Gyeongbokgung+Palace+Seoul" target="_blank" rel="noopener">Фото ↗</a></article><article class="place"><img class="ph" loading="lazy" alt="Чхандоккун" src="assets/place-06.jpg"><span class="tag">Дворец · ЮНЕСКО</span><h3>Чхандоккун</h3><span class="ko">창덕궁</span>
+        <p>Дворец в списке ЮНЕСКО с 1997 года. Залы и павильоны вписаны в склон холма, осенью здесь красные клёны и жёлтые гинкго.</p>
+        <p class="tip">Закрыт по понедельникам.</p>
+        <a class="photo" href="https://www.google.com/search?tbm=isch&q=Changdeokgung+Palace+autumn" target="_blank" rel="noopener">Фото ↗</a></article></div><p class="night"><span>Ночуем</span> Hotel Jak Insadong by Anook</p></div></article><article class="day"><div class="dh"><span class="dd">30</span><span class="dm">окт · пт</span></div><div class="db"><h3>Намсан и Мёндон</h3><ul><li>Подъём к башне Seoul Tower на горе Намсан. Вариант А: до района Мёндон / Чхунмуро, дальше кольцевыми автобусами 01А или 01В до подножия башни (от Чонгака и Ангука они не идут). Вариант Б: от станции Ангук (линия 3) 3 остановки до Чхунмуро, пересадка на линию 4, 1 остановка до Мёндона, выход 3 и 10–15 минут пешком до площадки с фуникулёром.</li><li>Спускаемся пешком по тропам Namsan Dulle-gil вдоль каменных стен: красиво и есть подсветка. Другой вариант спуска — лестница Sam-soon Steps к фуникулёру.</li><li><b>вечером</b> Мёндон: шопинг косметики и одежды, 10 минут пешком.</li></ul><div class="dplaces"><article class="place"><img class="ph" loading="lazy" alt="Башня Намсан" src="assets/place-07.jpg"><span class="tag">Панорама</span><h3>Башня Намсан</h3><span class="ko">남산서울타워</span>
+        <p>Башня высотой 236 м на вершине холма Намсан. Смотровая площадка даёт обзор всего Сеула, особенно красив закат.</p>
+        <p class="tip">Подъём пешком или на фуникулёре.</p>
+        <a class="photo" href="https://www.google.com/search?tbm=isch&q=N+Seoul+Tower+Namsan" target="_blank" rel="noopener">Фото ↗</a></article><article class="place"><img class="ph" loading="lazy" alt="Мёндон" src="assets/place-08.jpg"><span class="tag">Шопинг</span><h3>Мёндон</h3><span class="ko">명동</span>
+        <p>Главная торговая улица: корейская косметика, одежда и вечерний рынок уличной еды.</p>
+        <a class="photo" href="https://www.google.com/search?tbm=isch&q=Myeongdong+Seoul+night+street+food" target="_blank" rel="noopener">Фото ↗</a></article></div><p class="night"><span>Ночуем</span> Hotel Jak Insadong by Anook</p></div></article><article class="day"><div class="dh"><span class="dd">31</span><span class="dm">окт · сб</span></div><div class="db"><h3>Крепость в Сувоне</h3><ul><li>Метро от станции Jongno 3-ga по тёмно-синей линии 1. Следите, чтобы поезд шёл в сторону SUWON, CHEONAN или SINCHANG: ветка раздваивается, поезда на Incheon не подходят. Выходим на Suwon Station, в пути 1 ч – 1 ч 15 мин.</li><li>От вокзала автобусом 11, 13, 39 или другим в сторону Hwaseong Haenggung / Paldalmun до остановки Hwaseong Haenggung / Suwon Cultural Center.</li><li>Крепость Хвасон, павильон Банхвасурючжон, временный дворец Хвасон Хэнгун и центральные ворота.</li></ul><div class="dplaces"><article class="place"><img class="ph" loading="lazy" alt="Банхвасурючжон" src="assets/place-09.jpg"><span class="tag">Павильон · ЮНЕСКО</span><h3>Банхвасурючжон</h3><span class="ko">방화수류정</span><p>Павильон на углу стены крепости Хвасон над прудом. Один из самых фотографируемых видов в Сувоне.</p><a class="photo" href="https://www.google.com/search?tbm=isch&q=Banghwasuryujeong+Suwon" target="_blank" rel="noopener">Фото ↗</a></article><article class="place"><img class="ph" loading="lazy" alt="Крепость Хвасон" src="assets/place-10.jpg"><span class="tag">Однодневная поездка · ЮНЕСКО</span><h3>Крепость Хвасон</h3><span class="ko">수원화성</span>
+        <p>Стены длиной около 5,7 км, построены в 1794–1796 годах в Сувоне. От Сеула около часа на поезде или метро.</p>
+        <p class="tip">Лучше идти по стене целиком, около двух часов. Едем 31 октября.</p>
+        <a class="photo" href="https://www.google.com/search?tbm=isch&q=Hwaseong+Fortress+Suwon" target="_blank" rel="noopener">Фото ↗</a></article></div><p class="night"><span>Ночуем</span> Hotel Jak Insadong by Anook</p></div></article><article class="day"><div class="dh"><span class="dd">1</span><span class="dm">ноя · вс</span></div><div class="db"><h3>Букчхон, Сеульский лес, Хондэ</h3><ul><li><b>10:00</b> Деревня Букчхон, 10–15 минут пешком. Туристам вход разрешён только с 10:00 до 17:00, раньше нельзя: штраф 100 000 вон. К 10:00 людей ещё мало.</li><li>Сеульский лес и аллея гинкго. Вариант 1: от Ангука 2 остановки до Euljiro 3-ga, линия 2 в сторону Wangsimni до станции Ttukseom (выход 8, вход в парк). Вариант 2: линия 3 до Oksu, затем Gyeongui-Jungang 2 остановки до Wangsimni и жёлтая Suin-Bundang 1 остановка до Seoul Forest. Около 30 минут.</li><li><b>вечером</b> Хондэ: уличные музыканты, танцоры, магазины корейских брендов. От Seoul Forest 1 остановка до Wangsimni, там линия 2 к станции Hongik University.</li></ul><div class="dplaces"><article class="place"><img class="ph" loading="lazy" alt="Сеульский лес" src="assets/place-11.jpg"><span class="tag">Парк</span><h3>Сеульский лес</h3><span class="ko">서울숲</span><p>Большой городской парк с аллеями. В начале ноября здесь жёлтые гинкго.</p><a class="photo" href="https://www.google.com/search?tbm=isch&q=Seoul+Forest+ginkgo+autumn" target="_blank" rel="noopener">Фото ↗</a></article><article class="place"><img class="ph" loading="lazy" alt="Букчхон" src="assets/place-12.jpg"><span class="tag">Квартал</span><h3>Букчхон</h3><span class="ko">북촌한옥마을</span>
+        <p>Улочки с традиционными домами ханок на склоне между двумя дворцами. Лучший вид на крыши и город.</p>
+        <p class="tip">Здесь живут люди: ходите тихо. Туристам вход в жилые улицы только с 10:00 до 17:00, штраф 100 000 вон.</p>
+        <a class="photo" href="https://www.google.com/search?tbm=isch&q=Bukchon+Hanok+Village" target="_blank" rel="noopener">Фото ↗</a></article><article class="place"><img class="ph" loading="lazy" alt="Хондэ" src="assets/place-13.jpg"><span class="tag">Район</span><h3>Хондэ</h3><span class="ko">홍대</span>
+        <p>Район у университета Хонік: уличные выступления, кафе, бары и мастерские молодых дизайнеров.</p>
+        <a class="photo" href="https://www.google.com/search?tbm=isch&q=Hongdae+Seoul+street" target="_blank" rel="noopener">Фото ↗</a></article></div><p class="night"><span>Ночуем</span> Hotel Jak Insadong by Anook · последняя ночь в этом отеле</p></div></article></div>
+  </section>
+
+  <!-- GYEONGJU -->
+  <section class="city gj flip" id="gyeongju">
+    <div class="city-top">
+      <div>
+        <span class="when">2 — 4 нояб · 2 ночи</span>
+        <h2>Кёнджу<span class="ko">경주</span></h2>
+        <p class="lede">Столица королевства Силла почти тысячу лет. Город называют музеем без стен: курганы стоят прямо среди улиц.</p>
+      </div>
+      <figure class="scene"><img class="cityph" alt="Кёнджу" src="assets/city-2.jpg"><figcaption>Фото: Basile Morin, CC BY-SA 4.0</figcaption></figure>
+    </div>
+
+    <div class="stay"><div><div class="k">Где живём</div><div class="v">2–3 нояб: Hwangnamguan Hanok Village (ханок)<br>3–4 нояб: Soseoljae Guesthouse</div></div><div><div class="k">Дальше</div><div class="v">4 ноября на автобусе до Ульсана, около 45 минут</div></div></div><h3 class="sub">План и места по дням</h3><div class="days"><article class="day"><div class="dh"><span class="dd">2</span><span class="dm">ноя · пн</span></div><div class="db"><h3>Поезд в Кёнджу</h3><ul><li><b>утро</b> Выселение. До Сеульского вокзала такси 5–10 минут за 5000–7000 вон, или пешком до станции Чонгак (5–7 минут) и 2 остановки по линии 1.</li><li><b>10:58 → 13:06</b> KTX Seoul → Singyeongju.</li><li>От вокзала автобус 60 или 61 (самые удобные) до остановки у задних ворот Чхонмачхон, парк Тэрынвон. Автобусы 50, 51, 70 идут до перекрёстка Seorabeol Sageori. Такси 10–15 минут, около 13 долларов.</li><li><b>после обеда</b> Оставляем багаж и гуляем: улица Хваннидан-гиль (кафе, обед; отель на ней), парк гробниц Тэрынвон (5 минут пешком), обсерватория Чхомсондэ.</li><li><b>с 17:30</b> Мост Вольджонгё, пруд Вольджи и дворец Тонгун в вечерней подсветке.</li></ul><div class="dplaces"><article class="place"><img class="ph" loading="lazy" alt="Хваннидан-гиль" src="assets/place-14.jpg"><span class="tag">Улица</span><h3>Хваннидан-гиль</h3><span class="ko">황리단길</span><p>Улица кафе и ресторанов в старых ханоках у парка гробниц. Здесь же наш отель и вечерние бары.</p><a class="photo" href="https://www.google.com/search?tbm=isch&q=Hwangnidan-gil+Gyeongju" target="_blank" rel="noopener">Фото ↗</a></article><article class="place"><img class="ph" loading="lazy" alt="Мост Вольджонгё" src="assets/place-15.jpg"><span class="tag">Мост</span><h3>Мост Вольджонгё</h3><span class="ko">월정교</span><p>Воссозданный крытый мост через реку Намчхон. Вечером красиво подсвечен.</p><a class="photo" href="https://www.google.com/search?tbm=isch&q=Woljeonggyo+Bridge+Gyeongju+night" target="_blank" rel="noopener">Фото ↗</a></article><article class="place"><img class="ph" loading="lazy" alt="Тонгун и пруд Вольджи" src="assets/place-16.jpg"><span class="tag">Дворец</span><h3>Тонгун и пруд Вольджи</h3><span class="ko">동궁과 월지</span><p>Бывший пруд и павильоны силлаского дворца. После заката отражение подсветки в воде.</p><a class="photo" href="https://www.google.com/search?tbm=isch&q=Donggung+Palace+Wolji+Pond+night" target="_blank" rel="noopener">Фото ↗</a></article><article class="place"><img class="ph" loading="lazy" alt="Курганы Силла" src="assets/place-17.jpg"><span class="tag">Парк</span><h3>Курганы Силла</h3><span class="ko">대릉원</span>
+        <p>Парк с огромными травяными курганами царских гробниц. В одной из них, Чхонмачхон, можно заглянуть внутрь.</p>
+        <a class="photo" href="https://www.google.com/search?tbm=isch&q=Daereungwon+Tumuli+Park+Gyeongju" target="_blank" rel="noopener">Фото ↗</a></article><article class="place"><img class="ph" loading="lazy" alt="Чхомсондэ" src="assets/place-18.jpg"><span class="tag">Обсерватория</span><h3>Чхомсондэ</h3><span class="ko">첨성대</span>
+        <p>Каменная башня VII века высотой около 9 м. Считается одной из старейших сохранившихся обсерваторий Восточной Азии.</p>
+        <p class="tip">Красива вечером с подсветкой, рядом улица Хваннидан-гиль.</p>
+        <a class="photo" href="https://www.google.com/search?tbm=isch&q=Cheomseongdae+Observatory+Gyeongju" target="_blank" rel="noopener">Фото ↗</a></article></div><p class="night"><span>Ночуем</span> Hwangnamguan Hanok Village · Хваннам-дон</p></div></article><article class="day"><div class="dh"><span class="dd">3</span><span class="dm">ноя · вт</span></div><div class="db"><h3>Пульгукса и Соккурам</h3><ul><li><b>утро</b> Переходим пешком в другое жильё: Soseoljae Guesthouse (소설재 첨성대점, 포석로1050번길 48).</li><li>До остановки 10 минут пешком (Seorabeol Sageori / Hwangnidan Street или у Тэрынвона). Автобус 10 или 11 (подходят также 700 и 711) до храма Пульгукса, 30–40 минут.</li><li>Выше в гору к гроту Соккурам автобусом 12, 15–20 минут. Ходит примерно раз в час, расписание смотрите на остановке.</li><li><b>вечером</b> Заселение, отдых и бары на улице Хваннидан-гиль.</li></ul><div class="dplaces"><article class="place"><img class="ph" loading="lazy" alt="Пульгукса" src="assets/place-19.jpg"><span class="tag">Храм · ЮНЕСКО</span><h3>Пульгукса</h3><span class="ko">불국사</span>
+        <p>Буддийский храм, основанный в 528 году и перестроенный в 751-м. Известен двумя каменными пагодами: Дабот и Сокка.</p>
+        <p class="tip">Приезжайте к открытию: днём на лестницах много групп.</p>
+        <a class="photo" href="https://www.google.com/search?tbm=isch&q=Bulguksa+Temple+Gyeongju+autumn" target="_blank" rel="noopener">Фото ↗</a></article><article class="place"><img class="ph" loading="lazy" alt="Соккурам" src="assets/place-20.jpg"><span class="tag">Грот · ЮНЕСКО</span><h3>Соккурам</h3><span class="ko">석굴암</span>
+        <p>Рукотворный грот на склоне горы Тохамсан с каменным Буддой VIII века. Находится недалеко от Пульгуксы.</p>
+        <p class="tip">Внутри фотографировать нельзя.</p>
+        <a class="photo" href="https://www.google.com/search?tbm=isch&q=Seokguram+Grotto" target="_blank" rel="noopener">Фото ↗</a></article></div><p class="night"><span>Ночуем</span> Soseoljae Guesthouse Gyeongju · 포석로1050번길 48</p></div></article></div>
+  </section>
+
+  <!-- ULSAN -->
+  <section class="city ul" id="ulsan">
+    <div class="city-top">
+      <div>
+        <span class="when">4 — 5 нояб · 1 ночь</span>
+        <h2>Ульсан<span class="ko">울산</span></h2>
+        <p class="lede">Промышленный город с неожиданно зелёной стороной: сосны над морем и бамбуковая роща вдоль реки.</p>
+      </div>
+      <figure class="scene"><img class="cityph" alt="Ульсан" src="assets/city-3.jpg"><figcaption>Фото: Glabb, Public domain</figcaption></figure>
+    </div>
+
+    <div class="stay"><div><div class="k">Где живём</div><div class="v">Ulsan City Hotel, Самсан-ро, район Нам-гу · 4–5 нояб</div></div><div><div class="k">Дальше</div><div class="v">5 ноября в Пусан: автобус около 55 минут до Хэундэ</div></div></div><h3 class="sub">План и места по дням</h3><div class="days"><article class="day"><div class="dh"><span class="dd">4</span><span class="dm">ноя · ср</span></div><div class="db"><h3>Море и бамбук</h3><ul><li><b>утро</b> Выселение. С междугородного автовокзала Кёнджу на автобусе до автовокзала Ульсана, около 45 минут. До отеля пешком, оставляем багаж.</li><li><b>днём</b> Парк Тэвангам: подвесной мост работает с 9:00 до 18:00. Такси 25–30 минут, 15 000–20 000 вон. Или пешком 5–7 минут до остановки (Lotte Mart или автовокзал) и автобусы 124, 127 около 40–50 минут (сверить в Kakao Map).</li><li><b>вечером</b> Бамбуковый лес Тхэхваган, тропа «Млечный путь». Такси от моря 12 000–16 000 вон. Или автобусы 401, 304, 127, 35–45 минут (сверить в Kakao Map). От остановки 5–7 минут пешком через сад. Подсветка от заката до 22:00 или 23:00.</li></ul><div class="dplaces"><article class="place"><img class="ph" loading="lazy" alt="Парк Тэвангам" src="assets/place-21.jpg"><span class="tag">Побережье</span><h3>Парк Тэвангам</h3><span class="ko">대왕암공원</span>
+        <p>Сосновая роща на мысе, скалы, уходящие в море, и подвесной мост к ним. Хорошее место для долгой прогулки.</p>
+        <p class="tip">Возьмите ветровку: у моря дует.</p>
+        <a class="photo" href="https://www.google.com/search?tbm=isch&q=Daewangam+Park+Ulsan" target="_blank" rel="noopener">Фото ↗</a></article><article class="place"><img class="ph" loading="lazy" alt="Бамбуковый лес Тхэхваган" src="assets/place-22.jpg"><span class="tag">Роща</span><h3>Бамбуковый лес Тхэхваган</h3><span class="ko">태화강 십리대숲</span>
+        <p>Бамбуковая аллея вдоль реки протяжённостью около 4 км. Внутри тихо и прохладно, под ногами тропа.</p>
+        <a class="photo" href="https://www.google.com/search?tbm=isch&q=Taehwagang+Bamboo+Forest+Ulsan" target="_blank" rel="noopener">Фото ↗</a></article></div><p class="night"><span>Ночуем</span> Ulsan City Hotel · 삼산로 246</p></div></article></div>
+  </section>
+
+  <!-- BUSAN -->
+  <section class="city bs flip" id="busan">
+    <div class="city-top">
+      <div>
+        <span class="when">5 — 10 нояб · 5 ночей</span>
+        <h2>Пусан<span class="ko">부산</span></h2>
+        <p class="lede">Второй по величине город страны: пляжи, храмы на скалах, цветные кварталы на склонах и ночные огни мостов.</p>
+      </div>
+      <figure class="scene"><img class="cityph" alt="Пусан" src="assets/city-4.jpg"><figcaption>Фото: S h y numis, CC BY 4.0</figcaption></figure>
+    </div>
+
+    <div class="stay"><div><div class="k">Где живём</div><div class="v">W Residence Hotel, Хэундэ · 5–10 нояб</div></div><div><div class="k">Дальше</div><div class="v">10 ноября KTX в 12:34 до Сеула, прибытие в 15:00</div></div></div><h3 class="sub">План и места по дням</h3><div class="days"><article class="day"><div class="dh"><span class="dd">5</span><span class="dm">ноя · чт</span></div><div class="db"><h3>Переезд в Пусан</h3><ul><li>Вариант 1, проще: автобус от Ulsan Intercity Bus Terminal (рядом с отелем) до остановки Хэундэ (부산해운대시외버스정류소, Haeundae-ro 641), около 55 минут. До отеля 3 минуты пешком.</li><li>Вариант 2, длиннее: электричка Donghae Line от станции Taehwagang, по пути станция Osiria. Оставляем вещи в камере хранения и едем в храм Хэдон Ёнгунса. Потом назад на станцию, до BEXCO, там пересадка на оранжевую линию 2 и 2 остановки до Haeundae (отель в 1–2 минутах от выхода).</li><li><b>вечером</b> Заселяемся или оставляем багаж. Прогулка по полуострову Тонбэксом с видом на мост Кваналли, потом пляж Хэундэ.</li></ul><div class="dplaces"><article class="place"><img class="ph" loading="lazy" alt="Тонбэксом" src="assets/place-23.jpg"><span class="tag">Прогулка</span><h3>Тонбэксом</h3><span class="ko">동백섬</span><p>Небольшой мыс рядом с пляжем Хэундэ с тропой через сосны и видом на небоскрёбы.</p><a class="photo" href="https://www.google.com/search?tbm=isch&q=Dongbaekseom+Busan" target="_blank" rel="noopener">Фото ↗</a></article><article class="place"><img class="ph" loading="lazy" alt="Пляж Хэундэ" src="assets/place-24.jpg"><span class="tag">Пляж</span><h3>Пляж Хэундэ</h3><span class="ko">해운대해수욕장</span>
+        <p>Самый известный пляж Кореи с белым песком длиной около 1,5 км. В ноябре купаться холодно, зато безлюдно и красиво.</p>
+        <a class="photo" href="https://www.google.com/search?tbm=isch&q=Haeundae+Beach+Busan" target="_blank" rel="noopener">Фото ↗</a></article></div><p class="night"><span>Ночуем</span> W Residence Hotel · 해운대로 620 (5–10 нояб)</p></div></article><article class="day"><div class="dh"><span class="dd">6</span><span class="dm">ноя · пт</span></div><div class="db"><h3>Чхонсапхо и Дальмаджи</h3><ul><li>Трамвай (вместо капсул) со станции Mipo до Cheongsapo вдоль моря.</li><li>Смотровая площадка Daritdol и стеклянный мост. Обратно пешком по тропе Green Railway, 20 минут.</li><li>Холм Дальмаджи-гиль и чайный дом Bibibidang (비비비당, Dalmaji-gil 239-16), 30 минут пешком.</li><li><b>вечером</b> По желанию прогулка на яхте с пляжа Хэундэ на закате.</li></ul><div class="dplaces"><article class="place"><img class="ph" loading="lazy" alt="Чхонсапхо" src="assets/place-25.jpg"><span class="tag">Рыбацкий порт</span><h3>Чхонсапхо</h3><span class="ko">청사포</span><p>Маленький порт с красным маяком. Рядом смотровая площадка Daritdol и стеклянный мост.</p><a class="photo" href="https://www.google.com/search?tbm=isch&q=Cheongsapo+Busan" target="_blank" rel="noopener">Фото ↗</a></article><article class="place"><img class="ph" loading="lazy" alt="Станция Mipo" src="assets/place-26.jpg"><span class="tag">Старт</span><h3>Станция Mipo</h3><span class="ko">미포</span><p>Отсюда начинается прогулка и трамвай вдоль моря до Чхонсапхо.</p><a class="photo" href="https://www.google.com/search?tbm=isch&q=Mipo+Haeundae+Blueline+Park" target="_blank" rel="noopener">Фото ↗</a></article><article class="place"><img class="ph" loading="lazy" alt="Дальмаджи-гиль" src="assets/place-27.jpg"><span class="tag">Холм</span><h3>Дальмаджи-гиль</h3><span class="ko">달맞이길</span><p>Дорога по холму над Хэундэ с видами на море и кафе, среди них чайный дом Bibibidang.</p><a class="photo" href="https://www.google.com/search?tbm=isch&q=Dalmaji-gil+Haeundae" target="_blank" rel="noopener">Фото ↗</a></article></div><p class="night"><span>Ночуем</span> W Residence Hotel</p></div></article><article class="day"><div class="dh"><span class="dd">7</span><span class="dm">ноя · сб</span></div><div class="db"><h3>Храм у моря и дроны</h3><ul><li>Храм Хэдон Ёнгунса. Такси 10 000–13 000 вон. Или от метро Haeundae (выход 7) автобус 1001 (красный экспресс), 181 или 100: около 30 минут до остановки «Yonggungsa / National Institute of Fisheries Science» и ещё 12 минут пешком.</li><li><b>вечером</b> Ужин в прибрежном ресторане у пляжа Кваналли.</li><li><b>19:00 или 21:00</b> Шоу дронов над заливом. Бывает по субботам, длится около 12 минут. При дожде или сильном ветре могут отменить.</li></ul><div class="dplaces"><article class="place"><img class="ph" loading="lazy" alt="Хэдон Ёнгунса" src="assets/place-28.jpg"><span class="tag">Храм у моря</span><h3>Хэдон Ёнгунса</h3><span class="ko">해동용궁사</span>
+        <p>Буддийский храм 1376 года прямо на прибрежных скалах. Редкий случай, когда храм построен лицом к морю.</p>
+        <p class="tip">Лучше приехать утром, пока нет толп.</p>
+        <a class="photo" href="https://www.google.com/search?tbm=isch&q=Haedong+Yonggungsa+Temple+Busan" target="_blank" rel="noopener">Фото ↗</a></article><article class="place"><img class="ph" loading="lazy" alt="Шоу дронов в Кваналли" src="assets/place-29.jpg"><span class="tag">Вечер</span><h3>Шоу дронов в Кваналли</h3><span class="ko">광안리</span>
+        <p>Пляж с видом на подсвеченный мост Кваннандэгё. По вечерам над заливом бывают световые шоу дронов.</p>
+        <p class="tip">Шоу дронов по субботам в 19:00 или 21:00, у нас это 7 ноября. При дожде или сильном ветре могут отменить.</p>
+        <a class="photo" href="https://www.google.com/search?tbm=isch&q=Gwangalli+Beach+drone+show+Busan" target="_blank" rel="noopener">Фото ↗</a></article></div><p class="night"><span>Ночуем</span> W Residence Hotel</p></div></article><article class="day"><div class="dh"><span class="dd">8</span><span class="dm">ноя · вс</span></div><div class="db"><h3>Хинъёуль, Тхэджондэ, ночной рынок</h3><ul><li>Деревня Хинъёуль на острове Ёндо. Такси 20 000–25 000 вон. Или метро: линия 2 до Seomyeon, линия 1 до Nampo (выход 6), автобус 7, 71 или 508 около 12 минут до остановки Huinnyeoul Culture Village. Всего около 35–40 минут в метро.</li><li><b>днём</b> Парк Тхэджондэ на другой стороне острова: такси около 10 минут, 8000–10 000 вон. Поезд Danubi с июля 2026 года не ходит. Вместо него бесплатный кольцевой шаттл (ср–вс, 9:30–17:30, пн и вт не работает). Талон берут в кассе у входа с 9:10 в порядке очереди. В плохую погоду шаттл не ходит.</li><li><b>19:30–23:30</b> Ночной рынок Пупхён Кантон рядом с рыбным рынком Чагальчхи. От парка такси 10 000–15 000 вон или автобусы 8, 30, 88 до станций Nampo или Jagalchi и 7–10 минут пешком.</li></ul><div class="dplaces"><article class="place"><img class="ph" loading="lazy" alt="Пупхён Кантон" src="assets/place-30.jpg"><span class="tag">Вечерний рынок</span><h3>Пупхён Кантон</h3><span class="ko">부평깡통시장</span><p>Ночной рынок с уличной едой. Работает с 19:30 до 23:30.</p><a class="photo" href="https://www.google.com/search?tbm=isch&q=Bupyeong+Kkangtong+Night+Market" target="_blank" rel="noopener">Фото ↗</a></article><article class="place"><img class="ph" loading="lazy" alt="Чагальчхи" src="assets/place-31.jpg"><span class="tag">Рынок</span><h3>Чагальчхи</h3><span class="ko">자갈치시장</span><p>Крупнейший рыбный рынок страны, рядом с ночным рынком.</p><a class="photo" href="https://www.google.com/search?tbm=isch&q=Jagalchi+Market+Busan" target="_blank" rel="noopener">Фото ↗</a></article><article class="place"><img class="ph" loading="lazy" alt="Деревня Хинъёуль" src="assets/place-32.jpg"><span class="tag">Квартал</span><h3>Деревня Хинъёуль</h3><span class="ko">흰여울문화마을</span>
+        <p>Белые домики на обрыве острова Ёндо с кафе и узкими улочками над морем.</p>
+        <a class="photo" href="https://www.google.com/search?tbm=isch&q=Huinnyeoul+Culture+Village+Busan" target="_blank" rel="noopener">Фото ↗</a></article><article class="place"><img class="ph" loading="lazy" alt="Парк Тхэджондэ" src="assets/place-33.jpg"><span class="tag">Мыс</span><h3>Парк Тхэджондэ</h3><span class="ko">태종대</span>
+        <p>Скалистый мыс с маяком и обзорными площадками на острове Ёндо. Тропа занимает около двух часов.</p>
+        <p class="tip">Поезд Danubi с июля 2026 года не ходит. Вместо него бесплатный шаттл, ср–вс, 9:30–17:30, талон в кассе.</p>
+        <a class="photo" href="https://www.google.com/search?tbm=isch&q=Taejongdae+Busan+lighthouse" target="_blank" rel="noopener">Фото ↗</a></article></div><p class="night"><span>Ночуем</span> W Residence Hotel</p></div></article><article class="day"><div class="dh"><span class="dd">9</span><span class="dm">ноя · пн</span></div><div class="db"><h3>Помоса и Чонпхо</h3><ul><li>Храм Помоса. Метро: линия 2 до Seomyeon, линия 1 в сторону Nopo до станции Beomeosa, около 50 минут. Выход 5 или 7, затем автобус 90 (Beomeosa Village Bus) 15–20 минут до главных ворот. Или такси 25 000–35 000 вон.</li><li>Затем кафе-улица Чонпхо в районе Сомён. Обратно автобусом 90 до станции Beomeosa и метро до Seomyeon.</li></ul><div class="dplaces"><article class="place"><img class="ph" loading="lazy" alt="Чонпхо" src="assets/place-34.jpg"><span class="tag">Улица кафе</span><h3>Чонпхо</h3><span class="ko">전포카페거리</span><p>Квартал кафе в районе Сомён. Заходим после храма Помоса.</p><a class="photo" href="https://www.google.com/search?tbm=isch&q=Jeonpo+Cafe+Street+Busan" target="_blank" rel="noopener">Фото ↗</a></article><article class="place"><img class="ph" loading="lazy" alt="Помоса" src="assets/place-35.jpg"><span class="tag">Храм в горах</span><h3>Помоса</h3><span class="ko">범어사</span>
+        <p>Храм на горе Кымджонсан, основан в 678 году. Осенью вокруг него особенно красиво.</p>
+        <a class="photo" href="https://www.google.com/search?tbm=isch&q=Beomeosa+Temple+Busan" target="_blank" rel="noopener">Фото ↗</a></article></div><p class="night"><span>Ночуем</span> W Residence Hotel · последняя ночь</p></div></article></div>
+  </section>
+
+  <!-- FINISH -->
+  <section class="city" id="finish">
+    <div class="city-top" style="grid-template-columns:1fr">
+      <div>
+        <span class="when">10 — 12 нояб · 2 ночи</span>
+        <h2>Сеул<span class="ko">서울 · 인천</span></h2>
+        <p class="lede">Последние дни на шопинг и кафе. Последнюю ночь проводим рядом с аэропортом Инчхон.</p>
+      </div>
+      
+    </div>
+  <div class="stay"><div><div class="k">Где живём</div><div class="v">10–11 нояб: Hotel Poco Seongsu<br>11–12 нояб: Grand Blue Hotel &amp; Residence, Инчхон, Ёнджон</div></div><div><div class="k">Вылет</div><div class="v">12 ноября в 10:00, HY514, терминал 1</div></div></div><h3 class="sub">План и места по дням</h3><div class="days"><article class="day"><div class="dh"><span class="dd">10</span><span class="dm">ноя · вт</span></div><div class="db"><h3>Обратно в Сеул</h3><ul><li><b>утро</b> Выселение. До вокзала Пусан такси 15–20 минут за 15 000–20 000 вон. Или метро: линия 2 до Seomyeon, линия 1 в южном направлении до Busan Station, выходы ведут прямо в здание вокзала, около 45 минут.</li><li><b>12:34 → 15:00</b> KTX Busan → Seoul.</li><li><b>15:45</b> Заселение в Hotel Poco Seongsu (성수이로 96). Такси 20–25 минут, 12 000–16 000 вон. Или метро около 35 минут: линия 4 до Dongdaemun History & Culture Park (4 остановки), линия 2 до Seongsu (6 остановок), выход 3 или 4, 5 минут пешком.</li><li><b>вечером</b> Район Сонсу: сеульский Бруклин, бывшие фабрики, кафе и магазины.</li></ul><div class="dplaces"><article class="place"><img class="ph" loading="lazy" alt="Сонсу" src="assets/place-36.jpg"><span class="tag">Район</span><h3>Сонсу</h3><span class="ko">성수</span>
+          <p>Бывшие фабрики, ставшие кофейнями, шоурумами и магазинами. Хорошее место для сувениров.</p>
+          <a class="photo" href="https://www.google.com/search?tbm=isch&q=Seongsu-dong+Seoul+cafe+street" target="_blank" rel="noopener">Фото ↗</a></article></div><p class="night"><span>Ночуем</span> Hotel Poco Seongsu · 성수이로 96</p></div></article><article class="day"><div class="dh"><span class="dd">11</span><span class="dm">ноя · ср</span></div><div class="db"><h3>Последний шопинг</h3><ul><li><b>днём</b> Финальные покупки в Сонсу, торговом центре COEX или Мёндоне.</li><li><b>19:00</b> Забираем багаж и едем на метро и AREX до станции Yeongjong (영종역), около 1 ч 15 мин. Оттуда такси около 10 минут. Отель не у станции Унсо.</li></ul><div class="dplaces"><article class="place"><img class="ph" loading="lazy" alt="COEX" src="assets/place-37.jpg"><span class="tag">Шопинг</span><h3>COEX</h3><span class="ko">코엑스</span><p>Торговый центр с библиотекой Starfield Library, где книги стоят на стеллажах высотой в несколько этажей.</p><a class="photo" href="https://www.google.com/search?tbm=isch&q=Starfield+Library+COEX" target="_blank" rel="noopener">Фото ↗</a></article></div><p class="night"><span>Ночуем</span> Grand Blue Hotel &amp; Residence · 인천 영종구 자연대로 28</p></div></article><article class="day"><div class="dh"><span class="dd">12</span><span class="dm">ноя · чт</span></div><div class="db"><h3>Домой</h3><ul><li><b>06:40</b> Выселение и такси в терминал 1 Инчхона, около 17 км, 15–20 минут.</li><li><b>10:00</b> Вылет HY514 в Ташкент. Регистрация закрывается в 09:00.</li></ul><div class="dplaces"><article class="place"><img class="ph" loading="lazy" alt="Аэропорт Инчхон" src="assets/place-38.jpg"><span class="tag">Вылет</span><h3>Аэропорт Инчхон</h3><span class="ko">인천국제공항</span><p>Терминал 1. Рейс HY514 вылетает в 10:00, регистрация закрывается в 09:00.</p><a class="photo" href="https://www.google.com/search?tbm=isch&q=Incheon+International+Airport+Terminal+1" target="_blank" rel="noopener">Фото ↗</a></article></div></div></article></div>
+  </section>
+
+  <footer>Маршрут по дням обновлён 25.10.2026 по финальному плану. Часы работы, выходные дни и расписания перед поездкой стоит проверить на официальных сайтах мест. Номера автобусов с пометкой «сверить в Kakao Map» не подтверждены. Заявки на K-ETA поданы, статус можно проверить на k-eta.go.kr.<details class="credits"><summary>Авторы фотографий</summary><p>Фото с Wikimedia Commons по свободным лицензиям.</p><ul><li>Кёнбоккун: Basile Morin, CC BY-SA 4.0, <a href="https://commons.wikimedia.org/wiki/File:Front_view_of_the_Eastern_side_of_the_Imperial_Throne_Hall_Geunjeongjeon_at_Gyeongbokgung_Palace_in_Seoul.jpg" target="_blank" rel="noopener">файл на Commons</a></li><li>Чхандоккун: Bernard Gagnon, CC0, <a href="https://commons.wikimedia.org/wiki/File:Injeongjeon_Hall_01.jpg" target="_blank" rel="noopener">файл на Commons</a></li><li>Букчхон: Basile Morin, CC BY-SA 4.0, <a href="https://commons.wikimedia.org/wiki/File:Bukchon-ro_11-gil_street_with_hanok_houses_at_blue_hour_in_Bukchon_Hanok_Village_Seoul.jpg" target="_blank" rel="noopener">файл на Commons</a></li><li>Намсан: Rtflakfizer, CC BY-SA 4.0, <a href="https://commons.wikimedia.org/wiki/File:Namsan_Tower_sunset,_Seoul.jpg" target="_blank" rel="noopener">файл на Commons</a></li><li>Мёндон: Sgroey, CC BY-SA 4.0, <a href="https://commons.wikimedia.org/wiki/File:Myeongdong_night_market_seoul_4.jpg" target="_blank" rel="noopener">файл на Commons</a></li><li>Хондэ: lumoplank, CC0, <a href="https://commons.wikimedia.org/wiki/File:Hongdae,_Seoul-_Part_II_-_Hongdae2237.jpg" target="_blank" rel="noopener">файл на Commons</a></li><li>Хвасон: Bernard Gagnon, CC0, <a href="https://commons.wikimedia.org/wiki/File:Hwaseong_Fortress_01.jpg" target="_blank" rel="noopener">файл на Commons</a></li><li>Пульгукса: Basile Morin, CC BY-SA 4.0, <a href="https://commons.wikimedia.org/wiki/File:Bulguksa_temple_entrance_gate_stairs_flower_bed_and_blue_sky_in_Gyeongju_South_Korea.jpg" target="_blank" rel="noopener">файл на Commons</a></li><li>Соккурам: Bernard Gagnon, CC0, <a href="https://commons.wikimedia.org/wiki/File:Seokguram_Grotto_03.jpg" target="_blank" rel="noopener">файл на Commons</a></li><li>Курганы Силла: Basile Morin, CC BY-SA 4.0, <a href="https://commons.wikimedia.org/wiki/File:Trees_surrounded_by_grassy_tumuli_at_sunset_in_Daereungwon_Tomb_Complex_of_Gyeongju_in_South_Korea.jpg" target="_blank" rel="noopener">файл на Commons</a></li><li>Чхомсондэ: Basile Morin, CC BY-SA 4.0, <a href="https://commons.wikimedia.org/wiki/File:Cheomseongdae_Observatory_under_blue_sky_in_Gyeongju_South_Korea.jpg" target="_blank" rel="noopener">файл на Commons</a></li><li>Тэвангам: Shinfull, CC BY-SA 4.0, <a href="https://commons.wikimedia.org/wiki/File:Daewangam_Park.jpg" target="_blank" rel="noopener">файл на Commons</a></li><li>Тхэхваган: Choi2451, CC BY-SA 3.0, <a href="https://commons.wikimedia.org/wiki/File:Taehwa_River_Bamboo_Grove(Seepri),_Ulsan.jpg" target="_blank" rel="noopener">файл на Commons</a></li><li>Хэундэ: StephNurnberg, CC BY 2.0, <a href="https://commons.wikimedia.org/wiki/File:Haeundae_Beach_in_Busan.jpg" target="_blank" rel="noopener">файл на Commons</a></li><li>Ёнгунса: Anna L Martin, CC BY 2.0, <a href="https://commons.wikimedia.org/wiki/File:Haedong_Yonggungsa_Temple,_Busan,_South_Korea.jpg" target="_blank" rel="noopener">файл на Commons</a></li><li>Кваналли: lumoplank, CC0, <a href="https://commons.wikimedia.org/wiki/File:Gwangan_Bridge_and_Gwangalli_Beach_-_Gwangalli2721.jpg" target="_blank" rel="noopener">файл на Commons</a></li><li>Хинъёуль: Choi2451, CC0, <a href="https://commons.wikimedia.org/wiki/File:Huinnyeoul_culture_village,_Busan_on_October_25th,_2019.jpg" target="_blank" rel="noopener">файл на Commons</a></li><li>Тхэджондэ: Christophe95, CC BY-SA 4.0, <a href="https://commons.wikimedia.org/wiki/File:Cliffs_of_Taejongdae_1.jpg" target="_blank" rel="noopener">файл на Commons</a></li><li>Помоса: Basile Morin, CC BY-SA 4.0, <a href="https://commons.wikimedia.org/wiki/File:Front_exterior_view_of_Beomeosa_temple_with_stairs_and_blue_sky_in_Busan_South_Korea.jpg" target="_blank" rel="noopener">файл на Commons</a></li><li>Сонсу: CartoonChess, CC BY-SA 4.0, <a href="https://commons.wikimedia.org/wiki/File:Seongsu-dong_storefronts.jpg" target="_blank" rel="noopener">файл на Commons</a></li><li>Сеул (заставка): Flickr - Laurie Nevay https://www.flickr.com/photos/lauriene, CC BY-SA 2.0, <a href="https://commons.wikimedia.org/wiki/File:Skyline_view_from_Seoul_City_(South_Korea).jpg" target="_blank" rel="noopener">файл на Commons</a></li><li>Кёнджу (заставка): Basile Morin, CC BY-SA 4.0, <a href="https://commons.wikimedia.org/wiki/File:Water_reflection_of_Donggung_Palace_in_Wolji_Pond_at_blue_hour_in_Gyeongju_South_Korea.jpg" target="_blank" rel="noopener">файл на Commons</a></li><li>Ульсан (заставка): Glabb, Public domain, <a href="https://commons.wikimedia.org/wiki/File:Ulsan_Bridge_over_the_Taehwa_River.jpg" target="_blank" rel="noopener">файл на Commons</a></li><li>Пусан (заставка): S h y numis, CC BY 4.0, <a href="https://commons.wikimedia.org/wiki/File:Skyline_of_Busan_Including_Gwangan_Bridge,_Marine_City_and_LCT_Skyscrapers.jpg" target="_blank" rel="noopener">файл на Commons</a></li><li>Иксон-дон: S h y numis, CC BY-SA 4.0, <a href="https://commons.wikimedia.org/wiki/File:Ikseon-dong_익선동_October_1_2020_3.jpg" target="_blank" rel="noopener">файл на Commons</a></li><li>Инсадон: by Tom@HK, CC BY 2.0, <a href="https://commons.wikimedia.org/wiki/File:Seoul-Insadong-07.jpg" target="_blank" rel="noopener">файл на Commons</a></li><li>Чхонгечхон: Basile Morin, CC BY-SA 4.0, <a href="https://commons.wikimedia.org/wiki/File:Cheonggyecheon_stream_at_sunrise_with_trees_in_Seoul.jpg" target="_blank" rel="noopener">файл на Commons</a></li><li>Самчхон-дон: travel oriented, CC BY-SA 2.0, <a href="https://commons.wikimedia.org/wiki/File:Samcheong-dong.jpg" target="_blank" rel="noopener">файл на Commons</a></li><li>Банхвасурючжон: oreum, CC BY-SA 3.0, <a href="https://commons.wikimedia.org/wiki/File:Banghwasuryujeong_20081005_.JPG" target="_blank" rel="noopener">файл на Commons</a></li><li>Сеульский лес: Enigma7seven, CC BY-SA 3.0, <a href="https://commons.wikimedia.org/wiki/File:Seoulforest_path01.jpg" target="_blank" rel="noopener">файл на Commons</a></li><li>Хваннидан-гиль: Seefooddiet, CC BY-SA 4.0, <a href="https://commons.wikimedia.org/wiki/File:Hwangnidan-gil_01.jpg" target="_blank" rel="noopener">файл на Commons</a></li><li>Мост Вольджонгё: Basile Morin, CC BY-SA 4.0, <a href="https://commons.wikimedia.org/wiki/File:Illuminated_Woljeonggyo_Bridge_at_blue_hour_in_Gyeongju_South_Korea.jpg" target="_blank" rel="noopener">файл на Commons</a></li><li>Тонгун и пруд Вольджи: Bernard Gagnon, CC0, <a href="https://commons.wikimedia.org/wiki/File:Donggung_Palace_01.jpg" target="_blank" rel="noopener">файл на Commons</a></li><li>Тонбэксом: Brit in Seoul, CC BY-SA 4.0, <a href="https://commons.wikimedia.org/wiki/File:Dongbaekseom,_Busan_(2).jpg" target="_blank" rel="noopener">файл на Commons</a></li><li>Чхонсапхо: Andrewssi2, CC BY-SA 3.0, <a href="https://commons.wikimedia.org/wiki/File:Cheongsapo.jpg" target="_blank" rel="noopener">файл на Commons</a></li><li>Станция Mipo: hangidan, CC BY-SA 2.0, <a href="https://commons.wikimedia.org/wiki/File:Mipo,_Haeundae.jpg" target="_blank" rel="noopener">файл на Commons</a></li><li>Дальмаджи-гиль: Chris Yunker, CC BY-SA 2.0, <a href="https://commons.wikimedia.org/wiki/File:View_of_Dalmaji_Hill_in_Haeundae_District.jpg" target="_blank" rel="noopener">файл на Commons</a></li><li>Пупхён Кантон: Christophe95, CC BY-SA 4.0, <a href="https://commons.wikimedia.org/wiki/File:Bupyeong_Kkangtong_Night_Market.jpg" target="_blank" rel="noopener">файл на Commons</a></li><li>Чагальчхи: Bernard Gagnon, CC0, <a href="https://commons.wikimedia.org/wiki/File:Jagalchi_Market_02.jpg" target="_blank" rel="noopener">файл на Commons</a></li><li>Чонпхо: Christian Bolz, CC BY-SA 4.0, <a href="https://commons.wikimedia.org/wiki/File:Bus_stop_Jeonpo_Samgeori.jpg" target="_blank" rel="noopener">файл на Commons</a></li><li>COEX: Sean Young (@assanges), CC BY 4.0, <a href="https://commons.wikimedia.org/wiki/File:Starfield_Library_COEX_20240218.jpg" target="_blank" rel="noopener">файл на Commons</a></li><li>Аэропорт Инчхон: Maksym Kozlenko, CC BY-SA 4.0, <a href="https://commons.wikimedia.org/wiki/File:2023-01-27_Incheon_International_Airport.jpg" target="_blank" rel="noopener">файл на Commons</a></li></ul></details></footer>
+</div>
+
+<script>
+(function () {
+  try {
+    var el = document.getElementById('left');
+    var dep = new Date('2026-10-27T22:30:00+05:00').getTime();
+    var diff = dep - Date.now();
+    if (diff <= 0) { el.textContent = 'в пути'; return; }
+    var d = Math.floor(diff / 86400000);
+    var h = Math.floor((diff % 86400000) / 3600000);
+    el.textContent = d > 0 ? d + ' дн ' + h + ' ч' : h + ' ч';
+  } catch (e) {}
+})();
+</script>
+</body>
+</html>
