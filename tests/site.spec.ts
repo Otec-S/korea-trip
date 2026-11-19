@@ -31,6 +31,24 @@ test.describe("trip report", () => {
     }
   });
 
+  test("day strips are picked by hand and only hold photos taken that day", async ({ page }) => {
+    const data = (await manifest(page)) as Record<string, { day: string | null }[]>;
+    const days = page.locator(".day");
+    for (let n = 0; n < (await days.count()); n++) {
+      const day = days.nth(n);
+      const date = await day.getAttribute("data-date");
+      const strip = day.locator(".day-photos");
+      if ((await strip.count()) === 0) continue;
+      const refs = ((await strip.getAttribute("data-pick")) || "").split(",").filter(Boolean);
+      expect(refs.length, `${date} has data-pick`).toBeGreaterThan(0);
+      await expect(strip.locator("img"), `${date} renders all picks`).toHaveCount(refs.length);
+      for (const ref of refs) {
+        const [city, i] = ref.split(":");
+        expect(data[city][Number(i)].day, `${date} ${ref}`).toBe(date);
+      }
+    }
+  });
+
   test("impressions section is filled", async ({ page }) => {
     const items = page.locator("#impressions li");
     expect(await items.count()).toBeGreaterThanOrEqual(10);
