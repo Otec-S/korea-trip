@@ -2,8 +2,12 @@
   "name": "korea-trip",
   "version": "1.0.0",
   "private": true,
-  "description": "Лендинг маршрута поездки в Южную Корею, 28.10 — 12.11.2026",
+  "description": "Отчёт о поездке в Южную Корею, 28.10 — 12.11.2026: фото по городам и впечатления",
   "scripts": {
-    "start": "npx --yes serve . -l 5173"
+    "start": "npx --yes serve . -l 5173",
+    "test": "playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.65.1"
   }
 }
