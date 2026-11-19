@@ -4,7 +4,18 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<title>Корея 2026</title>
+<title>Корея. Осень 2026 — Сергей и Ирина</title>
+<meta name="description" content="Шестнадцать дней в Южной Корее: Сеул, Кёнджу, Ульсан и Пусан. Наш отчёт по дням, фотографии и впечатления."/>
+<meta property="og:type" content="article"/>
+<meta property="og:locale" content="ru_RU"/>
+<meta property="og:title" content="Корея. Осень 2026"/>
+<meta property="og:description" content="Сергей и Ирина: 16 дней, 4 города, наши фото и впечатления от Кореи."/>
+<meta property="og:url" content="https://otec-s.github.io/korea-trip/"/>
+<meta property="og:image" content="https://otec-s.github.io/korea-trip/assets/og-cover.jpg"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta property="og:image:alt" content="Сеул, Кёнджу, Ульсан и Пусан: четыре наших снимка"/>
+<meta name="twitter:card" content="summary_large_image"/>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600&amp;family=Noto+Serif+KR:wght@600;800&amp;family=Unbounded:wght@500;700&amp;display=swap" rel="stylesheet"/>
@@ -71,13 +82,13 @@ p { margin: 0; }
 .hero h1 { font-family: var(--f-display); font-weight: 700; font-size: clamp(34px, 7vw, 68px); line-height: 1.05; margin-top: 14px; max-width: 14ch; }
 .hero .sub { margin-top: 18px; font-size: 18px; max-width: 52ch; color: var(--mute); }
 .hero .sub b { color: var(--fg); font-weight: 600; }
-.facts { display: flex; flex-wrap: wrap; gap: 10px 28px; margin-top: 26px; }
+.facts { display: flex; flex-wrap: wrap; gap: 12px 32px; }
 .fact { min-width: 0; }
-.fact .k { font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--mute); }
-.fact .v { font-family: var(--f-display); font-weight: 500; font-size: 20px; font-variant-numeric: tabular-nums; }
+.fact .k { font-size: 13px; color: var(--mute); }
+.fact .v { font-family: var(--f-display); font-weight: 700; font-size: 34px; line-height: 1.1; font-variant-numeric: tabular-nums; }
 
 /* nights bar */
-.bar { display: grid; grid-template-columns: 5fr 2fr 1fr 5fr 2fr; gap: 3px; margin-top: 34px; height: 16px; }
+.bar { display: grid; grid-template-columns: 5fr 2fr 1fr 5fr 2fr; gap: 3px; margin-top: 28px; height: 12px; }
 .bar i { display: block; border-radius: 2px; }
 .legend { display: flex; flex-wrap: wrap; gap: 8px 22px; margin-top: 14px; padding: 0; list-style: none; font-size: 14px; }
 .legend li { display: flex; align-items: center; gap: 8px; min-width: 0; }
@@ -85,12 +96,8 @@ p { margin: 0; }
 .legend span.n { color: var(--mute); font-variant-numeric: tabular-nums; }
 .c-seoul { background: var(--seoul); } .c-gj { background: var(--gyeongju); } .c-ul { background: var(--ulsan); } .c-bs { background: var(--busan); }
 
-nav.jump { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 26px; }
-nav.jump a {
-  text-decoration: none; font-size: 14px; font-weight: 500; padding: 8px 14px; border-radius: 999px;
-  border: 1px solid var(--line); background: var(--card);
-}
-nav.jump a:hover { border-color: var(--fg); }
+
+
 
 /* flights strip */
 .flights { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; margin-top: 8px; }
@@ -147,7 +154,6 @@ nav.jump a:hover { border-color: var(--fg); }
 
 .scene img.cityph { display: block; width: 100%; height: auto; aspect-ratio: 16 / 11; object-fit: cover; border-radius: 10px; background: var(--line); }
 
-.sub { font-family: var(--f-display); font-weight: 500; font-size: 18px; margin-top: 28px; }
 .days { display: grid; gap: 12px; margin-top: 14px; }
 .day { display: grid; grid-template-columns: 84px minmax(0, 1fr); background: var(--card); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
 .dh { background: var(--city); color: var(--on); display: flex; flex-direction: column; align-items: center; justify-content: flex-start; padding: 14px 6px; gap: 2px; }
@@ -183,16 +189,18 @@ html{color-scheme:light} img{max-width:100%} body{margin:0}
 
 /* trip report */
 .story { margin-top: 8px; font-size: 15px; }
-.day-photos { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 8px; margin-top: 12px; align-items: stretch; }
-.day-photos .zoom img, .gallery .zoom img { display: block; width: 100%; height: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 6px; background: var(--line); }
-.day-photos .more { grid-column: 1 / -1; font-size: 13px; font-weight: 600; text-decoration: none; border-bottom: 2px solid var(--city); justify-self: start; }
+.day-photos { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; margin-top: 14px; }
+@media (max-width: 560px) { .day-photos { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.day-photos .zoom img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 6px; background: var(--line); }
+.gallery .zoom img { display: block; width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; border-radius: 6px; background: var(--line); }
+.day-photos .more { grid-column: 1 / -1; justify-self: start; margin: 2px 0 0; padding: 0 0 1px; border: 0; border-bottom: 2px solid var(--city); background: none; color: inherit; font: inherit; font-size: 13px; font-weight: 600; cursor: pointer; }
+.day-photos .more:focus-visible { outline: 2px solid var(--city); outline-offset: 3px; }
 details.plan { margin-top: 12px; font-size: 14px; }
 details.plan summary { cursor: pointer; color: var(--mute); font-weight: 600; }
 details.plan ul { margin-top: 8px; }
 .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 10px; margin-top: 14px; }
 .gallery figure { margin: 0; min-width: 0; }
 .gallery figcaption { font-size: 12px; color: var(--mute); margin-top: 4px; line-height: 1.3; }
-.sub .cnt { color: var(--mute); font-weight: 400; }
 .lightbox { flex-direction: column; gap: 10px; }
 .lightbox img { max-height: calc(100vh - 60px); }
 .lb-cap { color: #e8eaf0; font-size: 14px; text-align: center; padding: 0 16px; }
@@ -205,10 +213,91 @@ details.plan ul { margin-top: 8px; }
 #impressions { margin-top: 72px; }
 #impressions h2 { font-family: var(--f-display); font-weight: 700; font-size: clamp(32px, 5.4vw, 52px); line-height: 1.05; }
 #impressions .lede { margin-top: 16px; }
-.imp { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; margin-top: 24px; }
-.imp section { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 18px 20px; min-width: 0; }
+.imp { columns: 3 300px; column-gap: 14px; margin-top: 24px; }
+.imp section { break-inside: avoid; margin: 0 0 14px; background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 18px 20px; min-width: 0; }
 .imp h3 { font-size: 18px; font-weight: 600; }
 .imp ul { margin: 10px 0 0; padding-left: 18px; display: grid; gap: 8px; font-size: 15px; }
+
+/* cover: one photo per city, doubles as navigation */
+.hero { overflow: visible; }
+.hero .ghost { overflow: hidden; }
+.cover { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; margin-top: 28px; position: relative; }
+.cover a { position: relative; display: block; border-radius: 10px; overflow: hidden; text-decoration: none; background: var(--line); }
+.cover img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; transition: transform .4s ease; }
+.cover a:hover img { transform: scale(1.04); }
+.cover span { position: absolute; left: 0; right: 0; bottom: 0; padding: 26px 12px 10px; color: #fff; font-family: var(--f-display); font-weight: 500; font-size: 18px; background: linear-gradient(transparent, rgba(0, 0, 0, .65)); border-bottom: 5px solid var(--city); }
+@media (max-width: 760px) { .cover { grid-template-columns: repeat(2, minmax(0, 1fr)); } .cover img { aspect-ratio: 1; } .cover span { font-size: 15px; } }
+.hero-grid { display: grid; grid-template-columns: minmax(0, 1fr) 260px; gap: 28px; align-items: center; margin-top: 30px; }
+@media (max-width: 760px) { .hero-grid { grid-template-columns: 1fr; } .route-map { max-width: 300px; } .fact .v { font-size: 28px; } }
+.route-map { margin: 0; }
+.route-map svg { display: block; width: 100%; height: auto; }
+.route-map .leg { fill: none; stroke: var(--mute); stroke-width: 2; stroke-linecap: round; }
+.route-map .leg.back { stroke-dasharray: 4 5; opacity: .7; }
+.route-map .pt { fill: var(--mute); }
+.route-map .lb { font: 600 13px var(--f-body); fill: var(--fg); }
+.route-map .lb.mute { font-weight: 400; font-size: 11px; fill: var(--mute); }
+.route-map figcaption { font-size: 12px; color: var(--mute); }
+
+/* sticky section navigation */
+nav.jump { position: sticky; top: 0; z-index: 5; display: flex; gap: 8px; margin-top: 8px; padding-block: 10px; overflow-x: auto; scrollbar-width: none;
+  background: color-mix(in srgb, var(--bg) 92%, transparent); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+  box-shadow: 0 0 0 100vmax color-mix(in srgb, var(--bg) 92%, transparent); clip-path: inset(0 -100vmax); }
+nav.jump::-webkit-scrollbar { display: none; }
+nav.jump a { flex: none; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; font-size: 14px; font-weight: 500; padding: 7px 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--card); }
+nav.jump a[style]::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--dot); }
+nav.jump a:hover { border-color: var(--fg); }
+nav.jump a[aria-current="true"] { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+section[id], #teaser { scroll-margin-top: 64px; }
+
+/* five-line teaser */
+#teaser { margin-top: 36px; }
+#teaser h2 { font-family: var(--f-display); font-weight: 700; font-size: clamp(24px, 3.6vw, 32px); }
+.teaser { counter-reset: t; list-style: none; padding: 0; margin: 18px 0 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; }
+.teaser li { counter-increment: t; background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 16px 16px 18px; font-size: 15px; color: var(--mute); }
+.teaser li::before { content: counter(t); display: block; font-family: var(--f-display); font-weight: 700; font-size: 26px; line-height: 1; color: var(--sun); margin-bottom: 10px; }
+.teaser b { color: var(--fg); font-weight: 600; }
+.to-imp { display: inline-block; margin-top: 14px; font-weight: 600; text-decoration: none; border-bottom: 2px solid var(--sun); }
+
+/* plan changed tag */
+details.plan .changed { margin-left: 8px; padding: 2px 8px; border-radius: 4px; font-size: 12px; font-weight: 600; color: var(--fg); background: color-mix(in srgb, var(--sun) 35%, transparent); }
+
+/* collapsed city galleries */
+details.all-photos { margin-top: 22px; border: 1px solid var(--line); border-radius: 8px; background: var(--card); }
+details.all-photos > summary { cursor: pointer; padding: 14px 18px; font-family: var(--f-display); font-weight: 500; font-size: 17px; list-style: none; display: flex; align-items: center; gap: 10px; }
+details.all-photos > summary::-webkit-details-marker { display: none; }
+details.all-photos > summary::before { content: "▸"; color: var(--city); transition: transform .2s; }
+details.all-photos[open] > summary::before { transform: rotate(90deg); }
+details.all-photos .cnt { color: var(--mute); font-weight: 400; }
+details.all-photos .gallery { margin: 0; padding: 0 18px 18px; }
+
+/* two voices */
+.voices { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
+.voices p { margin: 0; padding: 10px 12px; border-radius: 6px; background: var(--bg); font-size: 14px; }
+.voices b { display: block; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--mute); }
+
+/* trip notes for those who follow our route */
+#trip-notes { margin-top: 56px; }
+details.notes { border: 1px solid var(--line); border-radius: 8px; background: var(--card); }
+details.notes > summary { cursor: pointer; padding: 18px 20px 18px 44px; display: grid; gap: 2px; position: relative; list-style: none; }
+details.notes > summary::-webkit-details-marker { display: none; }
+details.notes > summary::before { content: "▸"; position: absolute; left: 20px; top: 20px; font-size: 18px; color: var(--sun); transition: transform .2s; }
+details.notes[open] > summary::before { transform: rotate(90deg); }
+.notes-t { font-family: var(--f-display); font-weight: 500; font-size: 20px; }
+.notes-s { font-size: 14px; color: var(--mute); }
+details.notes .flights { margin: 0; padding: 0 20px; }
+.legs { width: calc(100% - 40px); margin: 18px 20px 0; border-collapse: collapse; font-size: 14px; }
+.legs th { text-align: left; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--mute); font-weight: 600; padding: 8px 10px 8px 0; border-bottom: 1px solid var(--line); }
+.legs td { padding: 10px 10px 10px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+.legs td:first-child { white-space: nowrap; font-variant-numeric: tabular-nums; }
+.notes-more { padding: 14px 20px 20px; font-size: 14px; color: var(--mute); }
+@media (max-width: 640px) {
+  .legs, .legs tbody, .legs tr, .legs td { display: block; width: auto; }
+  .legs { margin-inline: 20px; }
+  .legs thead { display: none; }
+  .legs tr { padding: 10px 0; border-bottom: 1px solid var(--line); }
+  .legs td { border: 0; padding: 2px 0; }
+  .legs td::before { content: attr(data-k) ": "; color: var(--mute); }
+}
 </style>
 <link href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ctext y=%22.9em%22 font-size=%2290%22%3E%F0%9F%87%B0%F0%9F%87%B7%3C/text%3E%3C/svg%3E" rel="icon"/></head>
 <body>
@@ -217,12 +306,16 @@ details.plan ul { margin-top: 8px; }
 <div aria-hidden="true" class="ghost">한국</div>
 <div class="eyebrow">Сергей и Ирина · Южная Корея</div>
 <h1>Корея. Осень 2026</h1>
-<p class="sub">Шестнадцать дней с <b>28 октября по 12 ноября</b>: дворцы Сеула, древний Кёнджу, бамбук Ульсана и море Пусана. Здесь наш маршрут по дням, наши фотографии и то, что мы увидели в Корее.</p>
-<div class="facts">
-<div class="fact"><div class="k">Вылет из Ташкента</div><div class="v">27 окт · 22:30</div></div>
-<div class="fact"><div class="k">Прилёт в Инчхон</div><div class="v">28 окт · 08:40</div></div>
-<div class="fact"><div class="k">Обратно</div><div class="v">12 ноя · 10:00</div></div>
-<div class="fact"><div class="k">Наших фото</div><div class="v">82</div></div>
+<p class="sub">Шестнадцать дней с <b>28 октября по 12 ноября</b>: дворцы Сеула, древний Кёнджу, бамбук Ульсана и море Пусана. Как это было: по дням, в наших фотографиях и впечатлениях.</p>
+<nav aria-label="Города на обложке" class="cover"><a href="#seoul" style="--city: var(--seoul)"><img alt="Смена караула в Кёнбоккуне" decoding="async" height="1200" sizes="(max-width: 760px) 50vw, 265px" src="assets/photos/seoul/20261029_141616.webp" srcset="assets/photos/seoul/20261029_141616-t.webp 480w, assets/photos/seoul/20261029_141616.webp 1600w" width="1600"/><span>Сеул</span></a><a href="#gyeongju" style="--city: var(--gyeongju)"><img alt="Храм Пульгукса" decoding="async" height="1200" sizes="(max-width: 760px) 50vw, 265px" src="assets/photos/gyeongju/20261103_164702.webp" srcset="assets/photos/gyeongju/20261103_164702-t.webp 480w, assets/photos/gyeongju/20261103_164702.webp 1600w" width="1600"/><span>Кёнджу</span></a><a href="#ulsan" style="--city: var(--ulsan)"><img alt="Бамбуковый лес Тхэхваган ночью" decoding="async" height="1200" sizes="(max-width: 760px) 50vw, 265px" src="assets/photos/ulsan/20261104_203015.webp" srcset="assets/photos/ulsan/20261104_203015-t.webp 480w, assets/photos/ulsan/20261104_203015.webp 1600w" width="1600"/><span>Ульсан</span></a><a href="#busan" style="--city: var(--busan)"><img alt="Храм Хэдон Ёнгунса на скалах" decoding="async" height="1200" sizes="(max-width: 760px) 50vw, 265px" src="assets/photos/busan/20261107_134742.webp" srcset="assets/photos/busan/20261107_134742-t.webp 480w, assets/photos/busan/20261107_134742.webp 1600w" width="1600"/><span>Пусан</span></a></nav>
+<div class="hero-grid">
+<div>
+<div class="facts" aria-label="Поездка в цифрах">
+<div class="fact"><div class="v">16</div><div class="k">дней</div></div>
+<div class="fact"><div class="v">4</div><div class="k">города</div></div>
+<div class="fact"><div class="v">7</div><div class="k">мест ночёвки</div></div>
+<div class="fact"><div class="v">2</div><div class="k">поезда KTX</div></div>
+<div class="fact"><div class="v" data-stat="photos">82</div><div class="k">наших фото</div></div>
 </div>
 <div aria-hidden="true" class="bar"><i class="c-seoul"></i><i class="c-gj"></i><i class="c-ul"></i><i class="c-bs"></i><i class="c-seoul"></i></div>
 <ul aria-label="Ночи по городам" class="legend">
@@ -232,74 +325,97 @@ details.plan ul { margin-top: 8px; }
 <li><span class="sw c-bs"></span>Пусан <span class="n">5 ночей</span></li>
 <li><span class="sw c-seoul"></span>Сеул <span class="n">1 ночь + 1 в Инчхоне</span></li>
 </ul>
-<nav aria-label="Города маршрута" class="jump">
-<a href="#seoul">Сеул</a><a href="#gyeongju">Кёнджу</a><a href="#ulsan">Ульсан</a><a href="#busan">Пусан</a><a href="#finish">10–12 ноября</a>
-<a href="#impressions">Впечатления</a></nav>
-</header>
-<section aria-label="Перелёты">
-<div class="flights">
-<div class="flight"><div class="tag">Туда · HY511</div><div class="route">Ташкент → Сеул Инчхон</div><div class="meta">27 окт 22:30 → 28 окт 08:40 · терминал 1 в Инчхоне · 6 ч 10 мин</div></div>
-<div class="flight"><div class="tag">Обратно · HY514</div><div class="route">Сеул Инчхон → Ташкент</div><div class="meta">12 ноя 10:00 → 13:10 · регистрация закрывается в 09:00 · 7 ч 10 мин</div></div>
 </div>
+<figure class="route-map">
+<svg aria-labelledby="route-t" role="img" viewBox="0 0 260 200" xmlns="http://www.w3.org/2000/svg">
+<title id="route-t">Схема маршрута: из Сеула поездом в Кёнджу, автобусами в Ульсан и Пусан, поездом обратно в Сеул</title>
+<path class="leg" d="M66 33 C 120 50, 170 80, 198 128"/>
+<path class="leg" d="M198 128 L 203 145 L 194 166"/>
+<path class="leg back" d="M194 166 C 140 160, 80 110, 66 33"/>
+<circle class="pt" cx="35" cy="39" r="3"/>
+<text class="lb mute" x="12" y="58">Инчхон</text>
+<circle cx="66" cy="33" r="7" style="fill: var(--seoul)"/><text class="lb" x="78" y="30">Сеул</text>
+<circle cx="198" cy="128" r="6" style="fill: var(--gyeongju)"/><text class="lb" text-anchor="end" x="188" y="124">Кёнджу</text>
+<circle cx="203" cy="145" r="5" style="fill: var(--ulsan)"/><text class="lb" x="213" y="149">Ульсан</text>
+<circle cx="194" cy="166" r="7" style="fill: var(--busan)"/><text class="lb" text-anchor="end" x="184" y="182">Пусан</text>
+</svg>
+<figcaption>Сплошная линия — туда, пунктир — обратно на KTX. Схема, не карта.</figcaption>
+</figure>
+</div>
+</header>
+<nav aria-label="Разделы" class="jump">
+<a href="#seoul" style="--dot: var(--seoul)">Сеул</a><a href="#gyeongju" style="--dot: var(--gyeongju)">Кёнджу</a><a href="#ulsan" style="--dot: var(--ulsan)">Ульсан</a><a href="#busan" style="--dot: var(--busan)">Пусан</a><a href="#finish" style="--dot: var(--seoul)">Снова Сеул</a><a href="#impressions">Впечатления</a><a href="#trip-notes">Советы</a>
+</nav>
+<section aria-labelledby="teaser-h" id="teaser">
+<h2 id="teaser-h">Корея в пяти фразах</h2>
+<ol class="teaser">
+<li><b>Туалеты</b> на каждой станции метро: чистые, бесплатные, а иногда с классической музыкой.</li>
+<li><b>Скамейки с подогревом</b> на остановках, а автобусы приходят минута в минуту.</li>
+<li><b>Давки нет нигде:</b> в метро заходят по разметке, у каждой двери две очереди.</li>
+<li><b>Детей мало, собачек много:</b> их возят в колясках и наряжают в костюмчики.</li>
+<li><b>Северная Корея рядом:</b> в номере фонарик, в метро противогазы.</li>
+</ol>
+<a class="to-imp" href="#impressions">Все впечатления →</a>
 </section>
 <!-- SEOUL -->
 <section class="city" id="seoul">
 <div class="city-top">
 <div>
-<span class="when">28 окт — 2 нояб · 5 ночей</span>
+<span class="when">28 окт — 2 ноя · 5 ночей</span>
 <h2>Сеул<span class="ko">서울</span></h2>
 <p class="lede">Королевские дворцы рядом с небоскрёбами, красные клёны и новогодние огни уже в конце октября.</p>
 </div>
-<figure class="scene"><button class="zoom" data-city="seoul" data-i="7" type="button"><img alt="Павильон Кёнхверу" class="cityph" height="1200" src="assets/photos/seoul/20261029_164925.webp" width="1600"/></button><figcaption>Павильон Кёнхверу</figcaption></figure>
+<figure class="scene"><button class="zoom" data-scope="gallery:seoul-gallery" data-city="seoul" data-i="7" type="button"><img alt="Павильон Кёнхверу" class="cityph" height="1200" src="assets/photos/seoul/20261029_164925.webp" width="1600"/></button><figcaption>Павильон Кёнхверу</figcaption></figure>
 </div>
-<div class="stay"><div><div class="k">Где жили</div><div class="v">Hotel Jak Insadong by Anook, Инсадон, Чонно-гу · 28 окт — 2 нояб</div></div><div><div class="k">Дальше</div><div class="v">2 ноября KTX в 10:58 до станции Singyeongju, прибытие в 13:06</div></div></div><h3 class="sub">По дням</h3><div class="days"><article class="day" data-date="2026-10-28"><div class="dh"><span class="dd">28</span><span class="dm">окт · ср</span></div><div class="db"><h3>Прилёт в Сеул</h3><p class="story">Прилетели утром в Инчхон, в аэропорту встречал огромный фиолетовый монстр. Вечером первая прогулка вдоль ручья Чхонгечхон и вход в наш отель в стиле ханок.</p><div class="day-photos" data-date="2026-10-28" data-pick="seoul:1,seoul:2,seoul:3"></div><details class="plan"><summary>Как планировали</summary><ul><li><b>08:40</b> Прилёт в Инчхон, терминал 1. Купите карту T-money: пополнить её можно только наличными, поэтому обменяйте немного денег прямо в аэропорту.</li><li>В отель, на выбор: экспресс AREX до Seoul Station, затем метро линии 1 до станции Чонгак (выход 3-1) и 5–10 минут пешком. Или автобус-лимузин №6002 до остановки Чонно 3-га (JONGNO 3-GA), оттуда 7–10 минут пешком. У станции Ангук 6002 не останавливается. Билеты на AREX и автобус можно взять в кассе или автомате аэропорта по карте.</li><li><b>до 15:00</b> Оставляем чемоданы и гуляем: деревня ханоков Иксон-дон с узкими улочками и кафе, пешеходная арт-улица Инсадон, ручей Чхонгечхон (10 минут пешком).</li></ul></details><p class="night"><span>Ночевали</span> Hotel Jak Insadong by Anook · 인사동14길 48</p></div></article><article class="day" data-date="2026-10-29"><div class="dh"><span class="dd">29</span><span class="dm">окт · чт</span></div><div class="db"><h3>Дворец Кёнбоккун</h3><p class="story">Весь день во дворце Кёнбоккун: ворота Кванхвамун, смена караула, пагода музея фольклора и павильон Кёнхверу на воде. Вечером первое корейское барбекю.</p><div class="day-photos" data-date="2026-10-29" data-pick="seoul:4,seoul:5,seoul:6,seoul:7"></div><details class="plan"><summary>Как планировали</summary><ul><li><b>к 10:00</b> Дворец Кёнбоккун и павильон Кёнхверу на воде. Смена караула в 10:00 и в 14:00. От отеля около 20 минут пешком.</li><li><b>днём</b> Дворец Чхандоккун, 20 минут пешком от Кёнбоккуна. Клёны и гинкго в разгаре осени.</li><li><b>вечером</b> Прогулка по Самчхон-дону: галереи и кофейни.</li></ul></details><p class="night"><span>Ночевали</span> Hotel Jak Insadong by Anook</p></div></article><article class="day" data-date="2026-10-30"><div class="dh"><span class="dd">30</span><span class="dm">окт · пт</span></div><div class="db"><h3>Намсан и Чхандоккун</h3><p class="story">Утром поднялись на Намсан: вид на город и стена замков любви. Днём дворец Чхандоккун, где клёны уже покраснели, а под вечер прошлись вдоль Чхонгечхона.</p><div class="day-photos" data-date="2026-10-30" data-pick="seoul:10,seoul:11,seoul:13,seoul:14"></div><details class="plan"><summary>Как планировали</summary><ul><li>Подъём к башне Seoul Tower на горе Намсан. Вариант А: до района Мёндон / Чхунмуро, дальше кольцевыми автобусами 01А или 01В до подножия башни (от Чонгака и Ангука они не идут). Вариант Б: от станции Ангук (линия 3) 3 остановки до Чхунмуро, пересадка на линию 4, 1 остановка до Мёндона, выход 3 и 10–15 минут пешком до площадки с фуникулёром.</li><li>Спускаемся пешком по тропам Namsan Dulle-gil вдоль каменных стен: красиво и есть подсветка. Другой вариант спуска — лестница Sam-soon Steps к фуникулёру.</li><li><b>вечером</b> Мёндон: шопинг косметики и одежды, 10 минут пешком.</li></ul></details><p class="night"><span>Ночевали</span> Hotel Jak Insadong by Anook</p></div></article><article class="day" data-date="2026-10-31"><div class="dh"><span class="dd">31</span><span class="dm">окт · сб</span></div><div class="db"><h3>Сеул пешком</h3><p class="story">Неспешный день в центре: прогулка по пешеходной эстакаде у Сеульского вокзала и ещё одно барбекю.</p><div class="day-photos" data-date="2026-10-31" data-pick="seoul:17,seoul:18"></div><details class="plan"><summary>Как планировали</summary><ul><li>Метро от станции Jongno 3-ga по тёмно-синей линии 1. Следите, чтобы поезд шёл в сторону SUWON, CHEONAN или SINCHANG: ветка раздваивается, поезда на Incheon не подходят. Выходим на Suwon Station, в пути 1 ч – 1 ч 15 мин.</li><li>От вокзала автобусом 11, 13, 39 или другим в сторону Hwaseong Haenggung / Paldalmun до остановки Hwaseong Haenggung / Suwon Cultural Center.</li><li>Крепость Хвасон, павильон Банхвасурючжон, временный дворец Хвасон Хэнгун и центральные ворота.</li></ul></details><p class="night"><span>Ночевали</span> Hotel Jak Insadong by Anook</p></div></article><article class="day" data-date="2026-11-01"><div class="dh"><span class="dd">1</span><span class="dm">ноя · вс</span></div><div class="db"><h3>Каннам</h3><p class="story">Вечером добрались до Каннама, к скульптуре Gangnam Style.</p><div class="day-photos" data-date="2026-11-01" data-pick="seoul:19"></div><details class="plan"><summary>Как планировали</summary><ul><li><b>10:00</b> Деревня Букчхон, 10–15 минут пешком. Туристам вход разрешён только с 10:00 до 17:00, раньше нельзя: штраф 100 000 вон. К 10:00 людей ещё мало.</li><li>Сеульский лес и аллея гинкго. Вариант 1: от Ангука 2 остановки до Euljiro 3-ga, линия 2 в сторону Wangsimni до станции Ttukseom (выход 8, вход в парк). Вариант 2: линия 3 до Oksu, затем Gyeongui-Jungang 2 остановки до Wangsimni и жёлтая Suin-Bundang 1 остановка до Seoul Forest. Около 30 минут.</li><li><b>вечером</b> Хондэ: уличные музыканты, танцоры, магазины корейских брендов. От Seoul Forest 1 остановка до Wangsimni, там линия 2 к станции Hongik University.</li></ul></details><p class="night"><span>Ночевали</span> Hotel Jak Insadong by Anook · последняя ночь в этом отеле</p></div></article></div>
-<h3 class="sub">Все фото: Сеул <span class="cnt">27</span></h3><div class="gallery" data-city="seoul"></div></section>
+<div class="days"><article class="day" data-date="2026-10-28"><div class="dh"><span class="dd">28</span><span class="dm">окт · ср</span></div><div class="db"><h3>Прилёт в Сеул</h3><p class="story">Прилетели утром в Инчхон, в аэропорту встречал огромный фиолетовый монстр. Вечером первая прогулка вдоль ручья Чхонгечхон и вход в наш отель в стиле ханок.</p><div class="day-photos" data-date="2026-10-28" data-pick="seoul:1,seoul:2,seoul:3"></div><details class="plan"><summary>Как планировали</summary><ul><li><b>08:40</b> Прилёт в Инчхон, терминал 1. Купите карту T-money: пополнить её можно только наличными, поэтому обменяйте немного денег прямо в аэропорту.</li><li>В отель, на выбор: экспресс AREX до Seoul Station, затем метро линии 1 до станции Чонгак (выход 3-1) и 5–10 минут пешком. Или автобус-лимузин №6002 до остановки Чонно 3-га (JONGNO 3-GA), оттуда 7–10 минут пешком. У станции Ангук 6002 не останавливается. Билеты на AREX и автобус можно взять в кассе или автомате аэропорта по карте.</li><li><b>до 15:00</b> Оставляем чемоданы и гуляем: деревня ханоков Иксон-дон с узкими улочками и кафе, пешеходная арт-улица Инсадон, ручей Чхонгечхон (10 минут пешком).</li></ul></details></div></article><article class="day" data-date="2026-10-29"><div class="dh"><span class="dd">29</span><span class="dm">окт · чт</span></div><div class="db"><h3>Дворец Кёнбоккун</h3><p class="story">Весь день во дворце Кёнбоккун: ворота Кванхвамун, смена караула, пагода музея фольклора и павильон Кёнхверу на воде. Вечером первое корейское барбекю.</p><div class="day-photos" data-date="2026-10-29" data-pick="seoul:4,seoul:5,seoul:6,seoul:7"></div><details class="plan"><summary>Как планировали</summary><ul><li><b>к 10:00</b> Дворец Кёнбоккун и павильон Кёнхверу на воде. Смена караула в 10:00 и в 14:00. От отеля около 20 минут пешком.</li><li><b>днём</b> Дворец Чхандоккун, 20 минут пешком от Кёнбоккуна. Клёны и гинкго в разгаре осени.</li><li><b>вечером</b> Прогулка по Самчхон-дону: галереи и кофейни.</li></ul></details></div></article><article class="day" data-date="2026-10-30"><div class="dh"><span class="dd">30</span><span class="dm">окт · пт</span></div><div class="db"><h3>Намсан и Чхандоккун</h3><p class="story">Утром поднялись на Намсан: вид на город и стена замков любви. Днём дворец Чхандоккун, где клёны уже покраснели, а под вечер прошлись вдоль Чхонгечхона.</p><div class="day-photos" data-date="2026-10-30" data-pick="seoul:10,seoul:11,seoul:13,seoul:14"></div><details class="plan"><summary>Как планировали</summary><ul><li>Подъём к башне Seoul Tower на горе Намсан. Вариант А: до района Мёндон / Чхунмуро, дальше кольцевыми автобусами 01А или 01В до подножия башни (от Чонгака и Ангука они не идут). Вариант Б: от станции Ангук (линия 3) 3 остановки до Чхунмуро, пересадка на линию 4, 1 остановка до Мёндона, выход 3 и 10–15 минут пешком до площадки с фуникулёром.</li><li>Спускаемся пешком по тропам Namsan Dulle-gil вдоль каменных стен: красиво и есть подсветка. Другой вариант спуска — лестница Sam-soon Steps к фуникулёру.</li><li><b>вечером</b> Мёндон: шопинг косметики и одежды, 10 минут пешком.</li></ul></details></div></article><article class="day" data-date="2026-10-31"><div class="dh"><span class="dd">31</span><span class="dm">окт · сб</span></div><div class="db"><h3>Сеул пешком</h3><p class="story">Неспешный день в центре: прогулка по пешеходной эстакаде у Сеульского вокзала и ещё одно барбекю.</p><div class="day-photos" data-date="2026-10-31" data-pick="seoul:17,seoul:18"></div><details class="plan"><summary>Как планировали <span class="changed">план поменялся</span></summary><ul><li>Метро от станции Jongno 3-ga по тёмно-синей линии 1. Следите, чтобы поезд шёл в сторону SUWON, CHEONAN или SINCHANG: ветка раздваивается, поезда на Incheon не подходят. Выходим на Suwon Station, в пути 1 ч – 1 ч 15 мин.</li><li>От вокзала автобусом 11, 13, 39 или другим в сторону Hwaseong Haenggung / Paldalmun до остановки Hwaseong Haenggung / Suwon Cultural Center.</li><li>Крепость Хвасон, павильон Банхвасурючжон, временный дворец Хвасон Хэнгун и центральные ворота.</li></ul></details></div></article><article class="day" data-date="2026-11-01"><div class="dh"><span class="dd">1</span><span class="dm">ноя · вс</span></div><div class="db"><h3>Каннам</h3><p class="story">Вечером добрались до Каннама, к скульптуре Gangnam Style.</p><div class="day-photos" data-date="2026-11-01" data-pick="seoul:19"></div><details class="plan"><summary>Как планировали <span class="changed">план поменялся</span></summary><ul><li><b>10:00</b> Деревня Букчхон, 10–15 минут пешком. Туристам вход разрешён только с 10:00 до 17:00, раньше нельзя: штраф 100 000 вон. К 10:00 людей ещё мало.</li><li>Сеульский лес и аллея гинкго. Вариант 1: от Ангука 2 остановки до Euljiro 3-ga, линия 2 в сторону Wangsimni до станции Ttukseom (выход 8, вход в парк). Вариант 2: линия 3 до Oksu, затем Gyeongui-Jungang 2 остановки до Wangsimni и жёлтая Suin-Bundang 1 остановка до Seoul Forest. Около 30 минут.</li><li><b>вечером</b> Хондэ: уличные музыканты, танцоры, магазины корейских брендов. От Seoul Forest 1 остановка до Wangsimni, там линия 2 к станции Hongik University.</li></ul></details></div></article></div>
+<details class="all-photos" id="seoul-gallery"><summary>Все фото: Сеул <span class="cnt"></span></summary><div class="gallery" data-city="seoul" data-to="2026-11-09"></div></details></section>
 <!-- GYEONGJU -->
 <section class="city gj flip" id="gyeongju">
 <div class="city-top">
 <div>
-<span class="when">2 — 4 нояб · 2 ночи</span>
+<span class="when">2 — 4 ноя · 2 ночи</span>
 <h2>Кёнджу<span class="ko">경주</span></h2>
 <p class="lede">Столица королевства Силла почти тысячу лет. Город называют музеем без стен: курганы стоят прямо среди улиц.</p>
 </div>
-<figure class="scene"><button class="zoom" data-city="gyeongju" data-i="10" type="button"><img alt="Пруд Вольджи" class="cityph" height="1200" src="assets/photos/gyeongju/20261102_193113.webp" width="1600"/></button><figcaption>Пруд Вольджи</figcaption></figure>
+<figure class="scene"><button class="zoom" data-scope="gallery:gyeongju-gallery" data-city="gyeongju" data-i="10" type="button"><img alt="Пруд Вольджи" class="cityph" height="1200" src="assets/photos/gyeongju/20261102_193113.webp" width="1600"/></button><figcaption>Пруд Вольджи</figcaption></figure>
 </div>
-<div class="stay"><div><div class="k">Где жили</div><div class="v">2–3 нояб: Hwangnamguan Hanok Village (ханок)<br/>3–4 нояб: Soseoljae Guesthouse</div></div><div><div class="k">Дальше</div><div class="v">4 ноября на автобусе до Ульсана, около 45 минут</div></div></div><h3 class="sub">По дням</h3><div class="days"><article class="day" data-date="2026-11-02"><div class="dh"><span class="dd">2</span><span class="dm">ноя · пн</span></div><div class="db"><h3>Ханок-отель и ночной Кёнджу</h3><p class="story">Приехали в Кёнджу и поселились в ханок-отеле Хваннамгван. Днём курганы Силла, к вечеру примерили ханбоки, ночью смотрели на подсвеченные обсерваторию Чхомсондэ и пруд Вольджи.</p><div class="day-photos" data-date="2026-11-02" data-pick="gyeongju:2,gyeongju:4,gyeongju:9,gyeongju:10"></div><details class="plan"><summary>Как планировали</summary><ul><li><b>утро</b> Выселение. До Сеульского вокзала такси 5–10 минут за 5000–7000 вон, или пешком до станции Чонгак (5–7 минут) и 2 остановки по линии 1.</li><li><b>10:58 → 13:06</b> KTX Seoul → Singyeongju.</li><li>От вокзала автобус 60 или 61 (самые удобные) до остановки у задних ворот Чхонмачхон, парк Тэрынвон. Автобусы 50, 51, 70 идут до перекрёстка Seorabeol Sageori. Такси 10–15 минут, около 13 долларов.</li><li><b>после обеда</b> Оставляем багаж и гуляем: улица Хваннидан-гиль (кафе, обед; отель на ней), парк гробниц Тэрынвон (5 минут пешком), обсерватория Чхомсондэ.</li><li><b>с 17:30</b> Мост Вольджонгё, пруд Вольджи и дворец Тонгун в вечерней подсветке.</li></ul></details><p class="night"><span>Ночевали</span> Hwangnamguan Hanok Village · Хваннам-дон</p></div></article><article class="day" data-date="2026-11-03"><div class="dh"><span class="dd">3</span><span class="dm">ноя · вт</span></div><div class="db"><h3>Мюленбергия и Пульгукса</h3><p class="story">Утром розовая мюленбергия у курганов, днём храм Пульгукса с фонариками и небесными стражами у ворот. Ночевали в гестхаусе, спали на матрасах на полу.</p><div class="day-photos" data-date="2026-11-03" data-pick="gyeongju:13,gyeongju:14,gyeongju:15,gyeongju:16"></div><details class="plan"><summary>Как планировали</summary><ul><li><b>утро</b> Переходим пешком в другое жильё: Soseoljae Guesthouse (소설재 첨성대점, 포석로1050번길 48).</li><li>До остановки 10 минут пешком (Seorabeol Sageori / Hwangnidan Street или у Тэрынвона). Автобус 10 или 11 (подходят также 700 и 711) до храма Пульгукса, 30–40 минут.</li><li>Выше в гору к гроту Соккурам автобусом 12, 15–20 минут. Ходит примерно раз в час, расписание смотрите на остановке.</li><li><b>вечером</b> Заселение, отдых и бары на улице Хваннидан-гиль.</li></ul></details><p class="night"><span>Ночевали</span> Soseoljae Guesthouse Gyeongju · 포석로1050번길 48</p></div></article></div>
-<h3 class="sub">Все фото: Кёнджу <span class="cnt">18</span></h3><div class="gallery" data-city="gyeongju"></div></section>
+<div class="days"><article class="day" data-date="2026-11-02"><div class="dh"><span class="dd">2</span><span class="dm">ноя · пн</span></div><div class="db"><h3>Ханок-отель и ночной Кёнджу</h3><p class="story">Приехали в Кёнджу и поселились в ханок-отеле Хваннамгван. Днём курганы Силла, к вечеру примерили ханбоки, ночью смотрели на подсвеченные обсерваторию Чхомсондэ и пруд Вольджи.</p><div class="day-photos" data-date="2026-11-02" data-pick="gyeongju:2,gyeongju:4,gyeongju:9,gyeongju:10"></div><details class="plan"><summary>Как планировали</summary><ul><li><b>утро</b> Выселение. До Сеульского вокзала такси 5–10 минут за 5000–7000 вон, или пешком до станции Чонгак (5–7 минут) и 2 остановки по линии 1.</li><li><b>10:58 → 13:06</b> KTX Seoul → Singyeongju.</li><li>От вокзала автобус 60 или 61 (самые удобные) до остановки у задних ворот Чхонмачхон, парк Тэрынвон. Автобусы 50, 51, 70 идут до перекрёстка Seorabeol Sageori. Такси 10–15 минут, около 13 долларов.</li><li><b>после обеда</b> Оставляем багаж и гуляем: улица Хваннидан-гиль (кафе, обед; отель на ней), парк гробниц Тэрынвон (5 минут пешком), обсерватория Чхомсондэ.</li><li><b>с 17:30</b> Мост Вольджонгё, пруд Вольджи и дворец Тонгун в вечерней подсветке.</li></ul></details></div></article><article class="day" data-date="2026-11-03"><div class="dh"><span class="dd">3</span><span class="dm">ноя · вт</span></div><div class="db"><h3>Мюленбергия и Пульгукса</h3><p class="story">Утром розовая мюленбергия у курганов, днём храм Пульгукса с фонариками и небесными стражами у ворот. Ночевали в гестхаусе, спали на матрасах на полу.</p><div class="day-photos" data-date="2026-11-03" data-pick="gyeongju:13,gyeongju:14,gyeongju:15,gyeongju:16"></div><details class="plan"><summary>Как планировали</summary><ul><li><b>утро</b> Переходим пешком в другое жильё: Soseoljae Guesthouse (소설재 첨성대점, 포석로1050번길 48).</li><li>До остановки 10 минут пешком (Seorabeol Sageori / Hwangnidan Street или у Тэрынвона). Автобус 10 или 11 (подходят также 700 и 711) до храма Пульгукса, 30–40 минут.</li><li>Выше в гору к гроту Соккурам автобусом 12, 15–20 минут. Ходит примерно раз в час, расписание смотрите на остановке.</li><li><b>вечером</b> Заселение, отдых и бары на улице Хваннидан-гиль.</li></ul></details></div></article></div>
+<details class="all-photos" id="gyeongju-gallery"><summary>Все фото: Кёнджу <span class="cnt"></span></summary><div class="gallery" data-city="gyeongju"></div></details></section>
 <!-- ULSAN -->
 <section class="city ul" id="ulsan">
 <div class="city-top">
 <div>
-<span class="when">4 — 5 нояб · 1 ночь</span>
+<span class="when">4 — 5 ноя · 1 ночь</span>
 <h2>Ульсан<span class="ko">울산</span></h2>
 <p class="lede">Промышленный город с неожиданно зелёной стороной: сосны над морем и бамбуковая роща вдоль реки.</p>
 </div>
-<figure class="scene"><button class="zoom" data-city="ulsan" data-i="2" type="button"><img alt="Скалы Тэвангама" class="cityph" height="1200" src="assets/photos/ulsan/20261104_164658.webp" width="1600"/></button><figcaption>Скалы Тэвангама</figcaption></figure>
+<figure class="scene"><button class="zoom" data-scope="gallery:ulsan-gallery" data-city="ulsan" data-i="2" type="button"><img alt="Скалы Тэвангама" class="cityph" height="1200" src="assets/photos/ulsan/20261104_164658.webp" width="1600"/></button><figcaption>Скалы Тэвангама</figcaption></figure>
 </div>
-<div class="stay"><div><div class="k">Где жили</div><div class="v">Ulsan City Hotel, Самсан-ро, район Нам-гу · 4–5 нояб</div></div><div><div class="k">Дальше</div><div class="v">5 ноября в Пусан: автобус около 55 минут до Хэундэ</div></div></div><h3 class="sub">По дням</h3><div class="days"><article class="day" data-date="2026-11-04"><div class="dh"><span class="dd">4</span><span class="dm">ноя · ср</span></div><div class="db"><h3>Море и бамбук</h3><p class="story">Переехали в Ульсан. Днём скалы и подвесной мост парка Тэвангам, вечером бамбуковый лес Тхэхваган в подсветке.</p><div class="day-photos" data-date="2026-11-04" data-pick="ulsan:2,ulsan:6,ulsan:8,ulsan:9"></div><details class="plan"><summary>Как планировали</summary><ul><li><b>утро</b> Выселение. С междугородного автовокзала Кёнджу на автобусе до автовокзала Ульсана, около 45 минут. До отеля пешком, оставляем багаж.</li><li><b>днём</b> Парк Тэвангам: подвесной мост работает с 9:00 до 18:00. Такси 25–30 минут, 15 000–20 000 вон. Или пешком 5–7 минут до остановки (Lotte Mart или автовокзал) и автобусы 124, 127 около 40–50 минут (сверить в Kakao Map).</li><li><b>вечером</b> Бамбуковый лес Тхэхваган, тропа «Млечный путь». Такси от моря 12 000–16 000 вон. Или автобусы 401, 304, 127, 35–45 минут (сверить в Kakao Map). От остановки 5–7 минут пешком через сад. Подсветка от заката до 22:00 или 23:00.</li></ul></details><p class="night"><span>Ночевали</span> Ulsan City Hotel · 삼산로 246</p></div></article></div>
-<h3 class="sub">Все фото: Ульсан <span class="cnt">15</span></h3><div class="gallery" data-city="ulsan"></div></section>
+<div class="days"><article class="day" data-date="2026-11-04"><div class="dh"><span class="dd">4</span><span class="dm">ноя · ср</span></div><div class="db"><h3>Море и бамбук</h3><p class="story">Переехали в Ульсан. Днём скалы и подвесной мост парка Тэвангам, вечером бамбуковый лес Тхэхваган в подсветке.</p><div class="day-photos" data-date="2026-11-04" data-pick="ulsan:2,ulsan:6,ulsan:8,ulsan:9"></div><details class="plan"><summary>Как планировали</summary><ul><li><b>утро</b> Выселение. С междугородного автовокзала Кёнджу на автобусе до автовокзала Ульсана, около 45 минут. До отеля пешком, оставляем багаж.</li><li><b>днём</b> Парк Тэвангам: подвесной мост работает с 9:00 до 18:00. Такси 25–30 минут, 15 000–20 000 вон. Или пешком 5–7 минут до остановки (Lotte Mart или автовокзал) и автобусы 124, 127 около 40–50 минут (сверить в Kakao Map).</li><li><b>вечером</b> Бамбуковый лес Тхэхваган, тропа «Млечный путь». Такси от моря 12 000–16 000 вон. Или автобусы 401, 304, 127, 35–45 минут (сверить в Kakao Map). От остановки 5–7 минут пешком через сад. Подсветка от заката до 22:00 или 23:00.</li></ul></details></div></article></div>
+<details class="all-photos" id="ulsan-gallery"><summary>Все фото: Ульсан <span class="cnt"></span></summary><div class="gallery" data-city="ulsan"></div></details></section>
 <!-- BUSAN -->
 <section class="city bs flip" id="busan">
 <div class="city-top">
 <div>
-<span class="when">5 — 10 нояб · 5 ночей</span>
+<span class="when">5 — 10 ноя · 5 ночей</span>
 <h2>Пусан<span class="ko">부산</span></h2>
 <p class="lede">Небоскрёбы Хэундэ, тропы вдоль моря, храм на скалах и канатная дорога над водой.</p>
 </div>
-<figure class="scene"><button class="zoom" data-city="busan" data-i="9" type="button"><img alt="Марин-сити с Тонбэксома" class="cityph" height="1200" src="assets/photos/busan/20261106_164655.webp" width="1600"/></button><figcaption>Марин-сити с Тонбэксома</figcaption></figure>
+<figure class="scene"><button class="zoom" data-scope="gallery:busan-gallery" data-city="busan" data-i="9" type="button"><img alt="Марин-сити с Тонбэксома" class="cityph" height="1200" src="assets/photos/busan/20261106_164655.webp" width="1600"/></button><figcaption>Марин-сити с Тонбэксома</figcaption></figure>
 </div>
-<div class="stay"><div><div class="k">Где жили</div><div class="v">W Residence Hotel, Хэундэ · 5–10 нояб</div></div><div><div class="k">Дальше</div><div class="v">10 ноября KTX в 12:34 до Сеула, прибытие в 15:00</div></div></div><h3 class="sub">По дням</h3><div class="days"><article class="day" data-date="2026-11-05"><div class="dh"><span class="dd">5</span><span class="dm">ноя · чт</span></div><div class="db"><h3>Последнее утро в Ульсане</h3><p class="story">Завтрак в отеле и дождливая улица Ульсана. Днём переехали в Пусан.</p><div class="day-photos" data-date="2026-11-05" data-pick="ulsan:13,ulsan:14"></div><details class="plan"><summary>Как планировали</summary><ul><li>Вариант 1, проще: автобус от Ulsan Intercity Bus Terminal (рядом с отелем) до остановки Хэундэ (부산해운대시외버스정류소, Haeundae-ro 641), около 55 минут. До отеля 3 минуты пешком.</li><li>Вариант 2, длиннее: электричка Donghae Line от станции Taehwagang, по пути станция Osiria. Оставляем вещи в камере хранения и едем в храм Хэдон Ёнгунса. Потом назад на станцию, до BEXCO, там пересадка на оранжевую линию 2 и 2 остановки до Haeundae (отель в 1–2 минутах от выхода).</li><li><b>вечером</b> Заселяемся или оставляем багаж. Прогулка по полуострову Тонбэксом с видом на мост Кваналли, потом пляж Хэундэ.</li></ul></details><p class="night"><span>Ночевали</span> W Residence Hotel · 해운대로 620 (5–10 нояб)</p></div></article><article class="day" data-date="2026-11-06"><div class="dh"><span class="dd">6</span><span class="dm">ноя · пт</span></div><div class="db"><h3>Хэундэ, Чхонсапхо, Тонбэксом</h3><p class="story">Пляж Хэундэ, трамвай вдоль моря и стеклянная площадка Чхонсапхо. Закат встретили на Тонбэксоме с видом на Марин-сити.</p><div class="day-photos" data-date="2026-11-06" data-pick="busan:1,busan:6,busan:4,busan:9"></div><details class="plan"><summary>Как планировали</summary><ul><li>Трамвай (вместо капсул) со станции Mipo до Cheongsapo вдоль моря.</li><li>Смотровая площадка Daritdol и стеклянный мост. Обратно пешком по тропе Green Railway, 20 минут.</li><li>Холм Дальмаджи-гиль и чайный дом Bibibidang (비비비당, Dalmaji-gil 239-16), 30 минут пешком.</li><li><b>вечером</b> По желанию прогулка на яхте с пляжа Хэундэ на закате.</li></ul></details><p class="night"><span>Ночевали</span> W Residence Hotel</p></div></article><article class="day" data-date="2026-11-07"><div class="dh"><span class="dd">7</span><span class="dm">ноя · сб</span></div><div class="db"><h3>Храм у моря</h3><p class="story">Храм Хэдон Ёнгунса на скалах у самой воды, потом чайная с панорамным окном на море.</p><div class="day-photos" data-date="2026-11-07" data-pick="busan:12,busan:13,busan:14,busan:15"></div><details class="plan"><summary>Как планировали</summary><ul><li>Храм Хэдон Ёнгунса. Такси 10 000–13 000 вон. Или от метро Haeundae (выход 7) автобус 1001 (красный экспресс), 181 или 100: около 30 минут до остановки «Yonggungsa / National Institute of Fisheries Science» и ещё 12 минут пешком.</li><li><b>вечером</b> Ужин в прибрежном ресторане у пляжа Кваналли.</li><li><b>19:00 или 21:00</b> Шоу дронов над заливом. Бывает по субботам, длится около 12 минут. При дожде или сильном ветре могут отменить.</li></ul></details><p class="night"><span>Ночевали</span> W Residence Hotel</p></div></article><article class="day" data-date="2026-11-08"><div class="dh"><span class="dd">8</span><span class="dm">ноя · вс</span></div><div class="db"><h3>Канатная дорога Сондо</h3><p class="story">Канатная дорога над морем и мост над скалами.</p><div class="day-photos" data-date="2026-11-08" data-pick="busan:16,busan:17"></div><details class="plan"><summary>Как планировали</summary><ul><li>Деревня Хинъёуль на острове Ёндо. Такси 20 000–25 000 вон. Или метро: линия 2 до Seomyeon, линия 1 до Nampo (выход 6), автобус 7, 71 или 508 около 12 минут до остановки Huinnyeoul Culture Village. Всего около 35–40 минут в метро.</li><li><b>днём</b> Парк Тхэджондэ на другой стороне острова: такси около 10 минут, 8000–10 000 вон. Поезд Danubi с июля 2026 года не ходит. Вместо него бесплатный кольцевой шаттл (ср–вс, 9:30–17:30, пн и вт не работает). Талон берут в кассе у входа с 9:10 в порядке очереди. В плохую погоду шаттл не ходит.</li><li><b>19:30–23:30</b> Ночной рынок Пупхён Кантон рядом с рыбным рынком Чагальчхи. От парка такси 10 000–15 000 вон или автобусы 8, 30, 88 до станций Nampo или Jagalchi и 7–10 минут пешком.</li></ul></details><p class="night"><span>Ночевали</span> W Residence Hotel</p></div></article><article class="day" data-date="2026-11-09"><div class="dh"><span class="dd">9</span><span class="dm">ноя · пн</span></div><div class="db"><h3>Пляж и световая выставка</h3><p class="story">Пасмурное утро на пустом пляже, днём световая выставка с зеркальными залами.</p><div class="day-photos" data-date="2026-11-09" data-pick="busan:18,busan:19,busan:20"></div><details class="plan"><summary>Как планировали</summary><ul><li>Храм Помоса. Метро: линия 2 до Seomyeon, линия 1 в сторону Nopo до станции Beomeosa, около 50 минут. Выход 5 или 7, затем автобус 90 (Beomeosa Village Bus) 15–20 минут до главных ворот. Или такси 25 000–35 000 вон.</li><li>Затем кафе-улица Чонпхо в районе Сомён. Обратно автобусом 90 до станции Beomeosa и метро до Seomyeon.</li></ul></details><p class="night"><span>Ночевали</span> W Residence Hotel · последняя ночь</p></div></article></div>
-<h3 class="sub">Все фото: Пусан <span class="cnt">22</span></h3><div class="gallery" data-city="busan"></div></section>
+<div class="days"><article class="day" data-date="2026-11-05"><div class="dh"><span class="dd">5</span><span class="dm">ноя · чт</span></div><div class="db"><h3>Из Ульсана в Пусан</h3><p class="story">Завтрак в отеле и дождливая улица Ульсана. Днём переехали в Пусан.</p><div class="day-photos" data-date="2026-11-05" data-pick="ulsan:13,ulsan:14"></div><details class="plan"><summary>Как планировали</summary><ul><li>Вариант 1, проще: автобус от Ulsan Intercity Bus Terminal (рядом с отелем) до остановки Хэундэ (부산해운대시외버스정류소, Haeundae-ro 641), около 55 минут. До отеля 3 минуты пешком.</li><li>Вариант 2, длиннее: электричка Donghae Line от станции Taehwagang, по пути станция Osiria. Оставляем вещи в камере хранения и едем в храм Хэдон Ёнгунса. Потом назад на станцию, до BEXCO, там пересадка на оранжевую линию 2 и 2 остановки до Haeundae (отель в 1–2 минутах от выхода).</li><li><b>вечером</b> Заселяемся или оставляем багаж. Прогулка по полуострову Тонбэксом с видом на мост Кваналли, потом пляж Хэундэ.</li></ul></details></div></article><article class="day" data-date="2026-11-06"><div class="dh"><span class="dd">6</span><span class="dm">ноя · пт</span></div><div class="db"><h3>Хэундэ, Чхонсапхо, Тонбэксом</h3><p class="story">Пляж Хэундэ, трамвай вдоль моря и стеклянная площадка Чхонсапхо. Закат встретили на Тонбэксоме с видом на Марин-сити.</p><div class="day-photos" data-date="2026-11-06" data-pick="busan:1,busan:6,busan:4,busan:9"></div><details class="plan"><summary>Как планировали</summary><ul><li>Трамвай (вместо капсул) со станции Mipo до Cheongsapo вдоль моря.</li><li>Смотровая площадка Daritdol и стеклянный мост. Обратно пешком по тропе Green Railway, 20 минут.</li><li>Холм Дальмаджи-гиль и чайный дом Bibibidang (비비비당, Dalmaji-gil 239-16), 30 минут пешком.</li><li><b>вечером</b> По желанию прогулка на яхте с пляжа Хэундэ на закате.</li></ul></details></div></article><article class="day" data-date="2026-11-07"><div class="dh"><span class="dd">7</span><span class="dm">ноя · сб</span></div><div class="db"><h3>Храм у моря</h3><p class="story">Храм Хэдон Ёнгунса на скалах у самой воды, потом чайная с панорамным окном на море.</p><div class="day-photos" data-date="2026-11-07" data-pick="busan:12,busan:13,busan:14,busan:15"></div><details class="plan"><summary>Как планировали</summary><ul><li>Храм Хэдон Ёнгунса. Такси 10 000–13 000 вон. Или от метро Haeundae (выход 7) автобус 1001 (красный экспресс), 181 или 100: около 30 минут до остановки «Yonggungsa / National Institute of Fisheries Science» и ещё 12 минут пешком.</li><li><b>вечером</b> Ужин в прибрежном ресторане у пляжа Кваналли.</li><li><b>19:00 или 21:00</b> Шоу дронов над заливом. Бывает по субботам, длится около 12 минут. При дожде или сильном ветре могут отменить.</li></ul></details></div></article><article class="day" data-date="2026-11-08"><div class="dh"><span class="dd">8</span><span class="dm">ноя · вс</span></div><div class="db"><h3>Канатная дорога Сондо</h3><p class="story">Канатная дорога над морем и мост над скалами.</p><div class="day-photos" data-date="2026-11-08" data-pick="busan:16,busan:17"></div><details class="plan"><summary>Как планировали <span class="changed">план поменялся</span></summary><ul><li>Деревня Хинъёуль на острове Ёндо. Такси 20 000–25 000 вон. Или метро: линия 2 до Seomyeon, линия 1 до Nampo (выход 6), автобус 7, 71 или 508 около 12 минут до остановки Huinnyeoul Culture Village. Всего около 35–40 минут в метро.</li><li><b>днём</b> Парк Тхэджондэ на другой стороне острова: такси около 10 минут, 8000–10 000 вон. Поезд Danubi с июля 2026 года не ходит. Вместо него бесплатный кольцевой шаттл (ср–вс, 9:30–17:30, пн и вт не работает). Талон берут в кассе у входа с 9:10 в порядке очереди. В плохую погоду шаттл не ходит.</li><li><b>19:30–23:30</b> Ночной рынок Пупхён Кантон рядом с рыбным рынком Чагальчхи. От парка такси 10 000–15 000 вон или автобусы 8, 30, 88 до станций Nampo или Jagalchi и 7–10 минут пешком.</li></ul></details></div></article><article class="day" data-date="2026-11-09"><div class="dh"><span class="dd">9</span><span class="dm">ноя · пн</span></div><div class="db"><h3>Пляж и световая выставка</h3><p class="story">Пасмурное утро на пустом пляже, днём световая выставка с зеркальными залами.</p><div class="day-photos" data-date="2026-11-09" data-pick="busan:18,busan:19,busan:20"></div><details class="plan"><summary>Как планировали <span class="changed">план поменялся</span></summary><ul><li>Храм Помоса. Метро: линия 2 до Seomyeon, линия 1 в сторону Nopo до станции Beomeosa, около 50 минут. Выход 5 или 7, затем автобус 90 (Beomeosa Village Bus) 15–20 минут до главных ворот. Или такси 25 000–35 000 вон.</li><li>Затем кафе-улица Чонпхо в районе Сомён. Обратно автобусом 90 до станции Beomeosa и метро до Seomyeon.</li></ul></details></div></article></div>
+<details class="all-photos" id="busan-gallery"><summary>Все фото: Пусан <span class="cnt"></span></summary><div class="gallery" data-city="busan"></div></details></section>
 <!-- FINISH -->
 <section class="city" id="finish">
 <div class="city-top" style="grid-template-columns:1fr">
 <div>
-<span class="when">10 — 12 нояб · 2 ночи</span>
+<span class="when">10 — 12 ноя · 2 ночи</span>
 <h2>Сеул<span class="ko">서울 · 인천</span></h2>
 <p class="lede">Последние дни: шоурумы, Сеульский лес и ночь рядом с аэропортом Инчхон.</p>
 </div>
 </div>
-<div class="stay"><div><div class="k">Где жили</div><div class="v">10–11 нояб: Hotel Poco Seongsu<br/>11–12 нояб: Grand Blue Hotel &amp; Residence, Инчхон, Ёнджон</div></div><div><div class="k">Вылет</div><div class="v">12 ноября в 10:00, HY514, терминал 1</div></div></div><h3 class="sub">По дням</h3><div class="days"><article class="day" data-date="2026-11-10"><div class="dh"><span class="dd">10</span><span class="dm">ноя · вт</span></div><div class="db"><h3>Обратно в Сеул</h3><p class="story">Днём KTX до Сеула, вечером шоурум с гигантскими инсталляциями.</p><div class="day-photos" data-date="2026-11-10" data-pick="busan:21,seoul:20,seoul:21,seoul:22"></div><details class="plan"><summary>Как планировали</summary><ul><li><b>утро</b> Выселение. До вокзала Пусан такси 15–20 минут за 15 000–20 000 вон. Или метро: линия 2 до Seomyeon, линия 1 в южном направлении до Busan Station, выходы ведут прямо в здание вокзала, около 45 минут.</li><li><b>12:34 → 15:00</b> KTX Busan → Seoul.</li><li><b>15:45</b> Заселение в Hotel Poco Seongsu (성수이로 96). Такси 20–25 минут, 12 000–16 000 вон. Или метро около 35 минут: линия 4 до Dongdaemun History &amp; Culture Park (4 остановки), линия 2 до Seongsu (6 остановок), выход 3 или 4, 5 минут пешком.</li><li><b>вечером</b> Район Сонсу: сеульский Бруклин, бывшие фабрики, кафе и магазины.</li></ul></details><p class="night"><span>Ночевали</span> Hotel Poco Seongsu · 성수이로 96</p></div></article><article class="day" data-date="2026-11-11"><div class="dh"><span class="dd">11</span><span class="dm">ноя · ср</span></div><div class="db"><h3>Сеульский лес</h3><p class="story">Последний день: красные клёны и олени в Сеульском лесу.</p><div class="day-photos" data-date="2026-11-11" data-pick="seoul:24,seoul:25,seoul:23,seoul:26"></div><details class="plan"><summary>Как планировали</summary><ul><li><b>днём</b> Финальные покупки в Сонсу, торговом центре COEX или Мёндоне.</li><li><b>19:00</b> Забираем багаж и едем на метро и AREX до станции Yeongjong (영종역), около 1 ч 15 мин. Оттуда такси около 10 минут. Отель не у станции Унсо.</li></ul></details><p class="night"><span>Ночевали</span> Grand Blue Hotel &amp; Residence · 인천 영종구 자연대로 28</p></div></article><article class="day" data-date="2026-11-12"><div class="dh"><span class="dd">12</span><span class="dm">ноя · чт</span></div><div class="db"><h3>Домой</h3><p class="story">Улетели домой рейсом HY514.</p><div class="day-photos" data-date="2026-11-12" data-pick=""></div><details class="plan"><summary>Как планировали</summary><ul><li><b>06:40</b> Выселение и такси в терминал 1 Инчхона, около 17 км, 15–20 минут.</li><li><b>10:00</b> Вылет HY514 в Ташкент. Регистрация закрывается в 09:00.</li></ul></details></div></article></div>
+<div class="days"><article class="day" data-date="2026-11-10"><div class="dh"><span class="dd">10</span><span class="dm">ноя · вт</span></div><div class="db"><h3>Обратно в Сеул</h3><p class="story">Днём KTX до Сеула, вечером шоурум с гигантскими инсталляциями.</p><div class="day-photos" data-date="2026-11-10" data-pick="busan:21,seoul:20,seoul:21,seoul:22"></div><details class="plan"><summary>Как планировали</summary><ul><li><b>утро</b> Выселение. До вокзала Пусан такси 15–20 минут за 15 000–20 000 вон. Или метро: линия 2 до Seomyeon, линия 1 в южном направлении до Busan Station, выходы ведут прямо в здание вокзала, около 45 минут.</li><li><b>12:34 → 15:00</b> KTX Busan → Seoul.</li><li><b>15:45</b> Заселение в Hotel Poco Seongsu (성수이로 96). Такси 20–25 минут, 12 000–16 000 вон. Или метро около 35 минут: линия 4 до Dongdaemun History &amp; Culture Park (4 остановки), линия 2 до Seongsu (6 остановок), выход 3 или 4, 5 минут пешком.</li><li><b>вечером</b> Район Сонсу: сеульский Бруклин, бывшие фабрики, кафе и магазины.</li></ul></details></div></article><article class="day" data-date="2026-11-11"><div class="dh"><span class="dd">11</span><span class="dm">ноя · ср</span></div><div class="db"><h3>Сеульский лес</h3><p class="story">Последний день: красные клёны и олени в Сеульском лесу.</p><div class="day-photos" data-date="2026-11-11" data-pick="seoul:24,seoul:25,seoul:23,seoul:26"></div><details class="plan"><summary>Как планировали</summary><ul><li><b>днём</b> Финальные покупки в Сонсу, торговом центре COEX или Мёндоне.</li><li><b>19:00</b> Забираем багаж и едем на метро и AREX до станции Yeongjong (영종역), около 1 ч 15 мин. Оттуда такси около 10 минут. Отель не у станции Унсо.</li></ul></details></div></article><article class="day" data-date="2026-11-12"><div class="dh"><span class="dd">12</span><span class="dm">ноя · чт</span></div><div class="db"><h3>Домой</h3><p class="story">Улетели домой рейсом HY514.</p><div class="day-photos" data-date="2026-11-12" data-pick=""></div><details class="plan"><summary>Как планировали</summary><ul><li><b>06:40</b> Выселение и такси в терминал 1 Инчхона, около 17 км, 15–20 минут.</li><li><b>10:00</b> Вылет HY514 в Ташкент. Регистрация закрывается в 09:00.</li></ul></details></div></article></div>
+<details class="all-photos" id="finish-gallery"><summary>Все фото: последние дни в Сеуле <span class="cnt"></span></summary><div class="gallery" data-city="seoul" data-from="2026-11-10"></div></details>
 </section><section id="impressions">
 <h2>Впечатления</h2>
 <p class="lede">Что мы заметили за шестнадцать дней. Записывали по горячим следам, каждый своё. Здесь заметки Сергея и Ирины, сведённые вместе.</p>
@@ -327,7 +443,7 @@ details.plan ul { margin-top: 8px; }
 <li>Не любят нарушать чужое личное пространство. Обратная сторона — безучастность: молодёжь редко уступает место пожилым. На вокзале у грузчика с тележки упала коробка, он не заметил, и никто его не окликнул.</li>
 <li>При этом не то чтобы законопослушны: могут курить толпой прямо под знаком «курение запрещено». Но на ходу по улице не курит никто.</li>
 <li>Пожилые очень активные: много стариков ходят в походы и занимаются на спортивных площадках в парках. Корейцы вообще любят гулять на природе, а красивой нетронутой природы много.</li>
-<li>Молодёжи много, а детей катастрофически мало. Многие словно заменили детей собачками: возят их в специальных колясках, наряжают в костюмчики и постоянно фотографируют. Сергею это показалось забавным и не таким уж массовым, Ирине — максимально диким.</li>
+<li>Молодёжи много, а детей катастрофически мало. Многие словно заменили детей собачками: возят их в специальных колясках, наряжают в костюмчики и постоянно фотографируют.<div class="voices"><p><b>Сергей</b>забавно и не так уж массово</p><p><b>Ирина</b>максимально дико</p></div></li>
 <li>Дорогих машин много, Porsche нередки: уровень жизни, судя по всему, высокий.</li>
 </ul>
 </section>
@@ -358,83 +474,145 @@ details.plan ul { margin-top: 8px; }
 </div>
 </section>
 
+<section aria-label="Для тех, кто поедет по нашему маршруту" id="trip-notes">
+<details class="notes"><summary><span class="notes-t">Для тех, кто поедет по нашему маршруту</span><span class="notes-s">Рейсы, где жили и как переезжали</span></summary>
+<div class="flights">
+<div class="flight"><div class="tag">Туда · HY511</div><div class="route">Ташкент → Сеул Инчхон</div><div class="meta">27 окт 22:30 → 28 окт 08:40 · терминал 1 в Инчхоне · 6 ч 10 мин</div></div>
+<div class="flight"><div class="tag">Обратно · HY514</div><div class="route">Сеул Инчхон → Ташкент</div><div class="meta">12 ноя 10:00 → 13:10 · регистрация закрывается в 09:00 · 7 ч 10 мин</div></div>
+</div>
+<table class="legs"><thead><tr><th>Даты</th><th>Город</th><th>Где жили</th><th>Дальше</th></tr></thead><tbody><tr><td data-k="Даты">28 окт — 2 ноя</td><td data-k="Город">Сеул</td><td data-k="Где жили">Hotel Jak Insadong by Anook, Инсадон · 인사동14길 48</td><td data-k="Дальше">2 ноя KTX 10:58 → Singyeongju, прибытие 13:06</td></tr><tr><td data-k="Даты">2–3 ноя</td><td data-k="Город">Кёнджу</td><td data-k="Где жили">Hwangnamguan Hanok Village (ханок), Хваннам-дон</td><td data-k="Дальше">пешком в соседний гестхаус</td></tr><tr><td data-k="Даты">3–4 ноя</td><td data-k="Город">Кёнджу</td><td data-k="Где жили">Soseoljae Guesthouse · 포석로1050번길 48</td><td data-k="Дальше">4 ноя автобус до Ульсана, около 45 минут</td></tr><tr><td data-k="Даты">4–5 ноя</td><td data-k="Город">Ульсан</td><td data-k="Где жили">Ulsan City Hotel, Самсан-ро · 삼산로 246</td><td data-k="Дальше">5 ноя автобус до Хэундэ, около 55 минут</td></tr><tr><td data-k="Даты">5–10 ноя</td><td data-k="Город">Пусан</td><td data-k="Где жили">W Residence Hotel, Хэундэ · 해운대로 620</td><td data-k="Дальше">10 ноя KTX 12:34 → Сеул, прибытие 15:00</td></tr><tr><td data-k="Даты">10–11 ноя</td><td data-k="Город">Сеул</td><td data-k="Где жили">Hotel Poco Seongsu · 성수이로 96</td><td data-k="Дальше">метро и AREX до станции Ёнджон, затем такси</td></tr><tr><td data-k="Даты">11–12 ноя</td><td data-k="Город">Инчхон</td><td data-k="Где жили">Grand Blue Hotel &amp; Residence, Ёнджон · 인천 영종구 자연대로 28</td><td data-k="Дальше">такси до терминала 1, 15–20 минут</td></tr></tbody></table>
+<p class="notes-more">Подробные маршруты на каждый день — в блоках «Как планировали» под каждым днём.</p>
+</details>
+</section>
 <footer>Фото: Сергей и Ирина, октябрь–ноябрь 2026. Впечатления — по заметкам Сергея и Ирины из поездки.</footer>
 </div>
 <dialog aria-label="Фото на весь экран" class="lightbox" id="lightbox"><button aria-label="Закрыть" class="lb-close" type="button">×</button><button aria-label="Предыдущее фото" class="lb-nav lb-prev" type="button">‹</button><button aria-label="Следующее фото" class="lb-nav lb-next" type="button">›</button><p class="lb-cap"></p></dialog><script src="assets/photos/photos.js"></script><script>
-// Renders day strips and city galleries from window.TRIP_PHOTOS and runs the fullscreen viewer.
+// Renders day strips and city galleries from window.TRIP_PHOTOS, fills the counters, highlights the current section and runs the fullscreen viewer.
 (function () {
   var data = window.TRIP_PHOTOS || {};
 
-  function thumb(city, i, p) {
+  function ref(city, i) { return { city: city, i: i, p: (data[city] || [])[i] }; }
+  var all = [];
+  Object.keys(data).forEach(function (city) {
+    data[city].forEach(function (p, i) { all.push(ref(city, i)); });
+  });
+  function dayRefs(date) { return all.filter(function (r) { return r.p.day === date; }); }
+
+  document.querySelectorAll('[data-stat="photos"]').forEach(function (el) { el.textContent = all.length; });
+
+  function thumb(r, scope) {
     var b = document.createElement('button');
     b.type = 'button';
     b.className = 'zoom';
-    b.dataset.city = city;
-    b.dataset.i = i;
+    b.dataset.city = r.city;
+    b.dataset.i = r.i;
+    b.dataset.scope = scope;
     var img = document.createElement('img');
-    img.src = p.thumb;
-    img.alt = p.caption;
+    img.src = r.p.thumb;
+    img.alt = r.p.caption;
     img.loading = 'lazy';
     img.decoding = 'async';
-    img.width = p.w > p.h ? 480 : Math.round(480 * p.w / p.h);
-    img.height = p.w > p.h ? Math.round(480 * p.h / p.w) : 480;
+    img.width = r.p.w > r.p.h ? 480 : Math.round(480 * r.p.w / r.p.h);
+    img.height = r.p.w > r.p.h ? Math.round(480 * r.p.h / r.p.w) : 480;
     b.appendChild(img);
     return b;
   }
 
-  // Full gallery per city
+  // Galleries: one per city; data-from / data-to split Seoul into the first visit and the last days
+  var galleries = {};
   document.querySelectorAll('.gallery[data-city]').forEach(function (g) {
-    var city = g.dataset.city;
-    (data[city] || []).forEach(function (p, i) {
+    var city = g.dataset.city, from = g.dataset.from || '', to = g.dataset.to || '9999';
+    var box = g.closest('details');
+    var refs = (data[city] || []).map(function (p, i) { return ref(city, i); }).filter(function (r) {
+      var d = r.p.day || '';
+      return d >= from && d <= to;
+    });
+    galleries[box.id] = refs;
+    refs.forEach(function (r) {
       var fig = document.createElement('figure');
-      fig.appendChild(thumb(city, i, p));
+      fig.appendChild(thumb(r, 'gallery:' + box.id));
       var cap = document.createElement('figcaption');
-      cap.textContent = p.caption;
+      cap.textContent = r.p.caption;
       fig.appendChild(cap);
       g.appendChild(fig);
     });
+    var cnt = box.querySelector('.cnt');
+    if (cnt) cnt.textContent = refs.length;
   });
 
   // Day strips: photos are picked by hand in data-pick ("city:index,...") so they match the day's title
   document.querySelectorAll('.day-photos[data-date]').forEach(function (box) {
     var date = box.dataset.date;
-    var pick = (box.dataset.pick || '').split(',').filter(Boolean).map(function (ref) {
-      var parts = ref.split(':');
-      return { city: parts[0], i: Number(parts[1]), p: (data[parts[0]] || [])[Number(parts[1])] };
-    }).filter(function (h) { return h.p; });
+    var pick = (box.dataset.pick || '').split(',').filter(Boolean).map(function (s) {
+      var parts = s.split(':');
+      return ref(parts[0], Number(parts[1]));
+    }).filter(function (r) { return r.p; });
     if (!pick.length) { box.remove(); return; }
-    pick.forEach(function (h) { box.appendChild(thumb(h.city, h.i, h.p)); });
-    var total = 0;
-    Object.keys(data).forEach(function (city) {
-      data[city].forEach(function (p) { if (p.day === date) total++; });
+    pick.forEach(function (r) { box.appendChild(thumb(r, 'day:' + date)); });
+    var day = dayRefs(date);
+    var rest = day.filter(function (r) {
+      return !pick.some(function (h) { return h.city === r.city && h.i === r.i; });
     });
-    if (total > pick.length) {
-      var more = document.createElement('a');
+    if (rest.length) {
+      var more = document.createElement('button');
+      more.type = 'button';
       more.className = 'more';
-      more.href = '#' + pick[0].city + '-gallery';
-      more.textContent = 'ещё ' + (total - pick.length) + ' в галерее';
+      more.dataset.scope = 'day:' + date;
+      more.dataset.start = day.indexOf(rest[0]);
+      more.textContent = 'ещё ' + rest.length + ' фото этого дня';
       box.appendChild(more);
     }
   });
-  document.querySelectorAll('.gallery[data-city]').forEach(function (g) { g.id = g.dataset.city + '-gallery'; });
 
-  // Viewer
+  // Section navigation: mark the section being read
+  var nav = document.querySelector('nav.jump');
+  if (nav) {
+    var links = Array.prototype.slice.call(nav.querySelectorAll('a'));
+    var targets = links.map(function (a) { return document.querySelector(a.getAttribute('href')); });
+    var current = -1, ticking = false;
+    var mark = function () {
+      ticking = false;
+      var line = window.innerHeight * 0.4, k = -1;
+      targets.forEach(function (t, n) { if (t && t.getBoundingClientRect().top <= line) k = n; });
+      if (k === current) return;
+      current = k;
+      if (k < 0) nav.scrollTo({ left: 0, behavior: 'smooth' });
+      links.forEach(function (a, n) {
+        if (n === k) {
+          a.setAttribute('aria-current', 'true');
+          nav.scrollTo({ left: a.offsetLeft - nav.offsetLeft - 16, behavior: 'smooth' });
+        } else a.removeAttribute('aria-current');
+      });
+    };
+    window.addEventListener('scroll', function () {
+      if (!ticking) { ticking = true; requestAnimationFrame(mark); }
+    }, { passive: true });
+    mark();
+  }
+
+  // Viewer: pages through the list it was opened from (a day or a gallery)
   var dlg = document.getElementById('lightbox');
   if (!dlg || !dlg.showModal) return;
   var cap = dlg.querySelector('.lb-cap');
   var big = null;
-  var cur = { city: null, i: 0 };
+  var cur = { list: [], i: 0 };
 
-  function show(city, i) {
-    var list = data[city] || [];
+  function scopeRefs(scope) {
+    var k = scope.indexOf(':'), kind = scope.slice(0, k), id = scope.slice(k + 1);
+    if (kind === 'day') return dayRefs(id);
+    if (kind === 'gallery') return galleries[id] || [];
+    return [];
+  }
+
+  function show(list, i) {
     if (!list.length) return;
     i = (i + list.length) % list.length;
-    cur = { city: city, i: i };
+    cur = { list: list, i: i };
     if (!big) {
       big = document.createElement('img');
       dlg.insertBefore(big, cap);
     }
-    var p = list[i];
+    var p = list[i].p;
     big.src = p.src;
     big.alt = p.caption;
     var d = p.day ? p.day.slice(8, 10) + '.' + p.day.slice(5, 7) : '';
@@ -443,24 +621,31 @@ details.plan ul { margin-top: 8px; }
   }
 
   document.addEventListener('click', function (e) {
-    var btn = e.target.closest('button.zoom');
-    if (btn && btn.dataset.city) { show(btn.dataset.city, Number(btn.dataset.i)); return; }
+    var btn = e.target.closest('button.zoom, button.more');
+    if (btn && btn.dataset.scope) {
+      var list = scopeRefs(btn.dataset.scope);
+      var start = btn.dataset.start !== undefined ? Number(btn.dataset.start) : list.findIndex(function (r) {
+        return r.city === btn.dataset.city && r.i === Number(btn.dataset.i);
+      });
+      show(list, Math.max(0, start));
+      return;
+    }
     if (!dlg.open) return;
-    if (e.target.closest('.lb-prev')) show(cur.city, cur.i - 1);
-    else if (e.target.closest('.lb-next')) show(cur.city, cur.i + 1);
+    if (e.target.closest('.lb-prev')) show(cur.list, cur.i - 1);
+    else if (e.target.closest('.lb-next')) show(cur.list, cur.i + 1);
     else if (e.target === dlg || e.target.closest('.lb-close')) dlg.close();
   });
   document.addEventListener('keydown', function (e) {
     if (!dlg.open) return;
-    if (e.key === 'ArrowRight') show(cur.city, cur.i + 1);
-    if (e.key === 'ArrowLeft') show(cur.city, cur.i - 1);
+    if (e.key === 'ArrowRight') show(cur.list, cur.i + 1);
+    if (e.key === 'ArrowLeft') show(cur.list, cur.i - 1);
   });
   var x0 = null;
   dlg.addEventListener('touchstart', function (e) { x0 = e.touches[0].clientX; }, { passive: true });
   dlg.addEventListener('touchend', function (e) {
     if (x0 === null) return;
     var dx = e.changedTouches[0].clientX - x0;
-    if (Math.abs(dx) > 40) show(cur.city, cur.i + (dx < 0 ? 1 : -1));
+    if (Math.abs(dx) > 40) show(cur.list, cur.i + (dx < 0 ? 1 : -1));
     x0 = null;
   });
 })();

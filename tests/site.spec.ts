@@ -15,10 +15,93 @@ test.describe("trip report", () => {
   test("each city has its own gallery with every selected photo", async ({ page }) => {
     const data = await manifest(page);
     for (const city of CITIES) {
-      const imgs = page.locator(`#${city} .gallery img`);
+      // Seoul photos are split between the first visit and the last days (#finish)
+      const imgs = page.locator(`.gallery[data-city="${city}"] img`);
       await expect(imgs, city).toHaveCount(data[city].length);
       expect(data[city].length, city).toBeGreaterThanOrEqual(12);
+      await expect(page.locator(`#${city} .gallery img`).first(), city).toBeAttached();
     }
+    await expect(page.locator("#finish .gallery img").first()).toBeAttached();
+  });
+
+  test("city galleries are collapsed until opened", async ({ page }) => {
+    const blocks = page.locator("details.all-photos");
+    await expect(blocks).toHaveCount(5);
+    for (const open of await blocks.evaluateAll((els) => els.map((e) => (e as HTMLDetailsElement).open))) {
+      expect(open).toBe(false);
+    }
+    const first = page.locator("#seoul details.all-photos");
+    await expect(first.locator(".gallery img").first()).toBeHidden();
+    await first.locator("summary").click();
+    await expect(first.locator(".gallery img").first()).toBeVisible();
+  });
+
+  test("trip in numbers counts our photos from the manifest", async ({ page }) => {
+    const data = await manifest(page);
+    const total = Object.values(data).reduce((n, list) => n + list.length, 0);
+    await expect(page.locator('[data-stat="photos"]')).toHaveText(String(total));
+  });
+
+  test("hero shows a cover photo for every city that links to its section", async ({ page }) => {
+    const tiles = page.locator(".hero .cover a");
+    await expect(tiles).toHaveCount(4);
+    expect(await tiles.evaluateAll((els) => els.map((e) => e.getAttribute("href")))).toEqual(
+      CITIES.map((c) => `#${c}`),
+    );
+    await expect(tiles.locator("img")).toHaveCount(4);
+  });
+
+  test("short impressions teaser near the top links to the full section", async ({ page }) => {
+    const teaser = page.locator("#teaser");
+    await expect(teaser.locator("li")).toHaveCount(5);
+    await expect(teaser.locator('a[href="#impressions"]')).toHaveCount(1);
+    const teaserTop = await teaser.evaluate((e) => e.getBoundingClientRect().top + scrollY);
+    const seoulTop = await page.locator("#seoul").evaluate((e) => e.getBoundingClientRect().top + scrollY);
+    expect(teaserTop).toBeLessThan(seoulTop);
+  });
+
+  test("logistics live in one collapsed block, not in the story", async ({ page }) => {
+    const notes = page.locator("#trip-notes details");
+    await expect(notes).toHaveCount(1);
+    expect(await notes.evaluate((e) => (e as HTMLDetailsElement).open)).toBe(false);
+    await expect(notes).toContainText("HY511");
+    await expect(notes).toContainText("Hotel Jak Insadong");
+    await expect(page.locator(".flight:not(#trip-notes .flight)")).toHaveCount(0);
+    await expect(page.locator(".stay, .db .night")).toHaveCount(0);
+  });
+
+  test("'more' button opens the whole day in the viewer and stays inside that day", async ({ page }) => {
+    const data = (await manifest(page)) as Record<string, { day: string | null }[]>;
+    const date = "2026-10-30";
+    const total = Object.values(data).flat().filter((p) => p.day === date).length;
+    await page.locator(`.day[data-date="${date}"] .more`).click();
+    const box = page.locator(".lightbox");
+    await expect(box).toBeVisible();
+    const cap = box.locator(".lb-cap");
+    for (let n = 0; n < total + 1; n++) {
+      await expect(cap).toContainText("30.10");
+      await expect(cap).toContainText(`/ ${total}`);
+      await page.keyboard.press("ArrowRight");
+    }
+  });
+
+  test("share preview tags point to an absolute cover image", async ({ page }) => {
+    const meta = (sel: string) => page.locator(sel).getAttribute("content");
+    expect(await meta('meta[name="description"]')).toBeTruthy();
+    expect(await meta('meta[property="og:title"]')).toBeTruthy();
+    expect(await meta('meta[property="og:description"]')).toBeTruthy();
+    const img = await meta('meta[property="og:image"]');
+    expect(img).toMatch(/^https:\/\/.+\.jpg$/);
+    const local = new URL(img!).pathname.replace(/^\/korea-trip/, "");
+    const res = await page.request.get(local);
+    expect(res.status()).toBe(200);
+  });
+
+  test("city navigation stays on screen while scrolling", async ({ page }) => {
+    const nav = page.locator("nav.jump");
+    await page.locator("#busan").scrollIntoViewIfNeeded();
+    await expect(nav).toBeInViewport();
+    await expect(nav.locator('a[aria-current="true"]')).toHaveAttribute("href", "#busan");
   });
 
   test("days show our own photos taken that day", async ({ page }) => {
@@ -65,6 +148,7 @@ test.describe("trip report", () => {
   });
 
   test("lightbox opens, pages with arrows and closes", async ({ page }) => {
+    await page.locator("#seoul details.all-photos summary").click();
     await page.locator("#seoul .gallery img").first().click();
     const box = page.locator(".lightbox");
     await expect(box).toBeVisible();
@@ -99,5 +183,9 @@ test.describe("mobile", () => {
     await page.goto("/");
     const overflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
     expect(overflow).toBeLessThanOrEqual(0);
+  });
+  test("first screen already has photos", async ({ page }) => {
+    await page.goto("/");
+    await expect(page.locator(".hero .cover img").first()).toBeInViewport();
   });
 });
