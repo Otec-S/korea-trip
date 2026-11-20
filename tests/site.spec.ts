@@ -110,7 +110,7 @@ test.describe("trip report", () => {
   });
 
   test("day strips are picked by hand and only hold photos taken that day", async ({ page }) => {
-    const data = (await manifest(page)) as Record<string, { day: string | null }[]>;
+    const data = (await manifest(page)) as Record<string, { src: string; day: string | null }[]>;
     const days = page.locator(".day");
     for (let n = 0; n < (await days.count()); n++) {
       const day = days.nth(n);
@@ -121,8 +121,12 @@ test.describe("trip report", () => {
       expect(refs.length, `${date} has data-pick`).toBeGreaterThan(0);
       await expect(strip.locator("img"), `${date} renders all picks`).toHaveCount(refs.length);
       for (const ref of refs) {
-        const [city, i] = ref.split(":");
-        expect(data[city][Number(i)].day, `${date} ${ref}`).toBe(date);
+        // picks name the photo file, so rebuilding the photo list cannot shift them
+        const [city, name] = ref.split(":");
+        expect(name, `${date} ${ref}`).not.toMatch(/^\d+$/);
+        const photo = (data[city] as { src: string; day: string | null }[]).find((p) => p.src.endsWith(`/${name}.webp`));
+        expect(photo, `${date} ${ref} exists`).toBeTruthy();
+        expect(photo!.day, `${date} ${ref}`).toBe(date);
       }
     }
   });
@@ -148,9 +152,9 @@ test.describe("trip report", () => {
     const box = page.locator(".lightbox");
     await expect(box).toBeVisible();
     const big = box.locator("img");
+    // the thumbnail shows first, then the full-size photo replaces it
+    await expect(big).toHaveAttribute("src", /(?<!-t)\.webp$/);
     const first = await big.getAttribute("src");
-    expect(first).toMatch(/\.webp$/);
-    expect(first).not.toMatch(/-t\.webp$/);
     await page.keyboard.press("ArrowRight");
     await expect(big).not.toHaveAttribute("src", first!);
     await page.keyboard.press("Escape");
@@ -160,7 +164,13 @@ test.describe("trip report", () => {
 
 test("no console errors or broken local requests", async ({ page }) => {
   const problems: string[] = [];
-  page.on("console", (m) => m.type() === "error" && problems.push(m.text()));
+  page.on("console", (m) => {
+    // network failures are checked by URL below; the console text has no URL to filter on
+    if (m.type() === "error" && !/^Failed to load resource/.test(m.text())) problems.push(m.text());
+  });
+  page.on("requestfailed", (r) => {
+    if (r.url().startsWith("http://localhost")) problems.push(`failed ${r.url()}`);
+  });
   page.on("pageerror", (e) => problems.push(e.message));
   page.on("response", (r) => {
     if (r.url().startsWith("http://localhost") && r.status() >= 400) problems.push(`${r.status()} ${r.url()}`);
@@ -182,5 +192,119 @@ test.describe("mobile", () => {
   test("first screen already has photos", async ({ page }) => {
     await page.goto("/");
     await expect(page.locator(".hero .cover img").first()).toBeInViewport();
+  });
+});
+
+// Real finger gestures on a phone: CDP touch events go through the browser's own scrolling and click logic
+test.describe("mobile viewer", () => {
+  test.use({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
+
+  async function swipe(page: Page, from: [number, number], to: [number, number]) {
+    const cdp = await page.context().newCDPSession(page);
+    const steps = 8;
+    await cdp.send("Input.dispatchTouchEvent", { type: "touchStart", touchPoints: [{ x: from[0], y: from[1] }] });
+    for (let s = 1; s <= steps; s++) {
+      const x = from[0] + ((to[0] - from[0]) * s) / steps;
+      const y = from[1] + ((to[1] - from[1]) * s) / steps;
+      await cdp.send("Input.dispatchTouchEvent", { type: "touchMove", touchPoints: [{ x, y }] });
+    }
+    await cdp.send("Input.dispatchTouchEvent", { type: "touchEnd", touchPoints: [] });
+    await page.waitForTimeout(300);
+  }
+
+  test("big city photo opens the same photo in the viewer", async ({ page }) => {
+    await page.goto("/");
+    for (const city of CITIES) {
+      const btn = page.locator(`#${city} .scene button.zoom`);
+      const src = await btn.locator("img").getAttribute("src");
+      await btn.tap();
+      await expect(page.locator(".lightbox img")).toHaveAttribute("src", src!);
+      await page.keyboard.press("Escape");
+    }
+  });
+
+  test("swiping pages photos without scrolling the page behind", async ({ page }) => {
+    await page.goto("/");
+    await page.locator('.day[data-date="2026-10-29"] .day-photos button.zoom').first().tap();
+    const cap = page.locator(".lightbox .lb-cap");
+    await expect(cap).toContainText("1 / ");
+    const y0 = await page.evaluate(() => scrollY);
+    // a diagonal left swipe, like a real thumb makes
+    await swipe(page, [320, 500], [80, 380]);
+    await expect(cap).toContainText("2 / ");
+    expect(await page.evaluate(() => scrollY)).toBe(y0);
+  });
+
+  test("a mostly vertical drag does not page photos", async ({ page }) => {
+    await page.goto("/");
+    await page.locator('.day[data-date="2026-10-29"] .day-photos button.zoom').first().tap();
+    const cap = page.locator(".lightbox .lb-cap");
+    await swipe(page, [200, 650], [150, 250]);
+    await expect(cap).toContainText("1 / ");
+  });
+
+  test("after swiping and closing, tapping a photo opens exactly that photo", async ({ page }) => {
+    await page.goto("/");
+    const strip = page.locator('.day[data-date="2026-10-29"] .day-photos button.zoom');
+    await strip.first().tap();
+    for (let n = 0; n < 3; n++) await swipe(page, [320, 420], [60, 400]);
+    await page.locator(".lightbox .lb-close").tap();
+    await expect(page.locator(".lightbox")).toBeHidden();
+    const target = page.locator('.day[data-date="2026-11-03"] .day-photos button.zoom').nth(1);
+    const want = await page.evaluate((el) => {
+      const b = el as HTMLElement;
+      return (window as any).TRIP_PHOTOS[b.dataset.city!][Number(b.dataset.i)].src;
+    }, await target.elementHandle());
+    await target.tap();
+    await expect(page.locator(".lightbox img")).toHaveAttribute("src", want);
+  });
+
+  test("on a slow network the viewer never shows the previous photo", async ({ page }) => {
+    await page.goto("/");
+    const strip = page.locator('.day[data-date="2026-10-29"] .day-photos button.zoom');
+    const big = page.locator(".lightbox img");
+    await strip.first().tap();
+    const first = await big.getAttribute("src");
+    await page.keyboard.press("Escape");
+    // full-size photos now take 3 s, thumbnails stay fast
+    await page.route(/\/assets\/photos\/.*(?<!-t)\.webp$/, async (route) => {
+      await new Promise((r) => setTimeout(r, 3000));
+      await route.continue();
+    });
+    await strip.nth(2).tap();
+    await page.waitForTimeout(300);
+    const shown = await big.evaluate((img: HTMLImageElement) => img.currentSrc || img.src);
+    expect(shown).not.toContain(first!);
+    expect(shown).toMatch(/-t\.webp$/);
+  });
+
+  test("the phone's Back button closes the viewer and stays on the page", async ({ page }) => {
+    await page.goto("/");
+    const url = page.url();
+    await page.locator('.day[data-date="2026-10-29"] .day-photos button.zoom').first().tap();
+    await expect(page.locator(".lightbox")).toBeVisible();
+    await page.goBack();
+    await expect(page.locator(".lightbox")).toBeHidden();
+    expect(page.url()).toBe(url);
+    // closing with the cross leaves no extra history entry behind
+    await page.locator('.day[data-date="2026-10-29"] .day-photos button.zoom').first().tap();
+    await page.locator(".lightbox .lb-close").tap();
+    await expect(page.locator(".lightbox")).toBeHidden();
+    const len = await page.evaluate(() => history.length);
+    await page.locator('.day[data-date="2026-10-29"] .day-photos button.zoom').first().tap();
+    await page.locator(".lightbox .lb-close").tap();
+    await page.waitForTimeout(200);
+    expect(await page.evaluate(() => history.length)).toBe(len);
+  });
+
+  test("big city photos load lazily and offer a small version for phones", async ({ page }) => {
+    await page.goto("/");
+    const imgs = page.locator(".scene img.cityph");
+    await expect(imgs).toHaveCount(4);
+    for (const img of await imgs.all()) {
+      await expect(img).toHaveAttribute("loading", "lazy");
+      await expect(img).toHaveAttribute("srcset", /-t\.webp 480w/);
+      await expect(img).toHaveAttribute("sizes", /.+/);
+    }
   });
 });
