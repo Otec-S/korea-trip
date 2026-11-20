@@ -100,11 +100,6 @@ p { margin: 0; }
 
 
 /* flights strip */
-.flights { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; margin-top: 8px; }
-.flight { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 16px 18px; min-width: 0; }
-.flight .route { font-family: var(--f-display); font-weight: 500; font-size: 20px; }
-.flight .meta { color: var(--mute); font-size: 14px; margin-top: 4px; font-variant-numeric: tabular-nums; }
-.flight .tag { font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--mute); font-weight: 600; }
 
 /* city sections */
 .city { margin-top: 72px; --city: var(--seoul); --on: var(--on-seoul); }
@@ -275,29 +270,6 @@ details.all-photos .gallery { margin: 0; padding: 0 18px 18px; }
 .voices p { margin: 0; padding: 10px 12px; border-radius: 6px; background: var(--bg); font-size: 14px; }
 .voices b { display: block; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--mute); }
 
-/* trip notes for those who follow our route */
-#trip-notes { margin-top: 56px; }
-details.notes { border: 1px solid var(--line); border-radius: 8px; background: var(--card); }
-details.notes > summary { cursor: pointer; padding: 18px 20px 18px 44px; display: grid; gap: 2px; position: relative; list-style: none; }
-details.notes > summary::-webkit-details-marker { display: none; }
-details.notes > summary::before { content: "▸"; position: absolute; left: 20px; top: 20px; font-size: 18px; color: var(--sun); transition: transform .2s; }
-details.notes[open] > summary::before { transform: rotate(90deg); }
-.notes-t { font-family: var(--f-display); font-weight: 500; font-size: 20px; }
-.notes-s { font-size: 14px; color: var(--mute); }
-details.notes .flights { margin: 0; padding: 0 20px; }
-.legs { width: calc(100% - 40px); margin: 18px 20px 0; border-collapse: collapse; font-size: 14px; }
-.legs th { text-align: left; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--mute); font-weight: 600; padding: 8px 10px 8px 0; border-bottom: 1px solid var(--line); }
-.legs td { padding: 10px 10px 10px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
-.legs td:first-child { white-space: nowrap; font-variant-numeric: tabular-nums; }
-.notes-more { padding: 14px 20px 20px; font-size: 14px; color: var(--mute); }
-@media (max-width: 640px) {
-  .legs, .legs tbody, .legs tr, .legs td { display: block; width: auto; }
-  .legs { margin-inline: 20px; }
-  .legs thead { display: none; }
-  .legs tr { padding: 10px 0; border-bottom: 1px solid var(--line); }
-  .legs td { border: 0; padding: 2px 0; }
-  .legs td::before { content: attr(data-k) ": "; color: var(--mute); }
-}
 </style>
 <link href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ctext y=%22.9em%22 font-size=%2290%22%3E%F0%9F%87%B0%F0%9F%87%B7%3C/text%3E%3C/svg%3E" rel="icon"/></head>
 <body>
@@ -426,7 +398,7 @@ details.notes .flights { margin: 0; padding: 0 20px; }
 <li>Автобусы и поезда ходят минута в минуту. В приложении в реальном времени видно, через сколько придёт нужный автобус. Метро очень удобное, общественный транспорт вообще развит сильно.</li>
 <li>В метро лифты везде: с улицы вниз, на пересадках, на каждый уровень. Тяжёлый чемодан нигде не надо поднимать. Задумано для пожилых, но выручает всех.</li>
 <li>Скамейки на автобусных остановках часто с подогревом. Кайф.</li>
-<li>Туалеты везде: на каждой станции метро и во всех туристических местах, чистые и бесплатные. В каждой кабинке красная кнопка вызова помощи, если кому-то стало плохо. Во многих приятно пахнет и тихо играет классическая музыка. Ирина была в полном восторге.</li>
+<li>Туалеты везде: на каждой станции метро и во всех туристических местах, чистые и бесплатные. В каждой кабинке красная кнопка вызова помощи, если кому-то стало плохо. Во многих приятно пахнет и тихо играет классическая музыка.</li>
 <li>Улицы поразительно чистые, хотя мусорных баков очень мало.</li>
 <li>Места для прогулок в самых неожиданных местах. В центре города река течёт ниже улиц, с прогулочными зонами по обоим берегам. Старую эстакаду над дорогами превратили в пешеходный сад с деревьями и цветами. Горы прямо в городе стали парками с тропами, деревянными лестницами, скамейками и туалетами. Сказка.</li>
 <li>Пешеходные дорожки в отличном состоянии.</li>
@@ -437,12 +409,12 @@ details.notes .flights { margin: 0; padding: 0 20px; }
 <section>
 <h3>Люди</h3>
 <ul>
-<li>Говорят мало и негромко, даже друг с другом. В общении сдержанные и довольно холодные.</li>
+<li>Говорят мало и негромко, даже друг с другом. В общении сдержанные.</li>
 <li>По-английски почти никто не говорит, а если говорит, понять трудно.</li>
 <li>Давки нет нигде. В автобус и в вагон метро заходят спокойно, по очереди: у каждой двери две очереди по разметке. На вокзале толпа с чемоданами вытягивается в линию к эскалатору и движется быстро.</li>
 <li>Не любят нарушать чужое личное пространство. Обратная сторона — безучастность: молодёжь редко уступает место пожилым. На вокзале у грузчика с тележки упала коробка, он не заметил, и никто его не окликнул.</li>
 <li>При этом не то чтобы законопослушны: могут курить толпой прямо под знаком «курение запрещено». Но на ходу по улице не курит никто.</li>
-<li>Пожилые очень активные: много стариков ходят в походы и занимаются на спортивных площадках в парках. Корейцы вообще любят гулять на природе, а красивой нетронутой природы много.</li>
+<li>Пожилые очень активные: много стариков занимаются на спортивных площадках в парках. Корейцы вообще любят гулять на природе, а красивой нетронутой природы много.</li>
 <li>Молодёжи много, а детей катастрофически мало. Многие словно заменили детей собачками: возят их в специальных колясках, наряжают в костюмчики и постоянно фотографируют.<div class="voices"><p><b>Сергей</b>забавно и не так уж массово</p><p><b>Ирина</b>максимально дико</p></div></li>
 <li>Дорогих машин много, Porsche нередки: уровень жизни, судя по всему, высокий.</li>
 </ul>
@@ -474,22 +446,13 @@ details.notes .flights { margin: 0; padding: 0 20px; }
 </div>
 </section>
 
-<section aria-label="Для тех, кто поедет по нашему маршруту" id="trip-notes">
-<details class="notes"><summary><span class="notes-t">Для тех, кто поедет по нашему маршруту</span><span class="notes-s">Рейсы, где жили и как переезжали</span></summary>
-<div class="flights">
-<div class="flight"><div class="tag">Туда · HY511</div><div class="route">Ташкент → Сеул Инчхон</div><div class="meta">27 окт 22:30 → 28 окт 08:40 · терминал 1 в Инчхоне · 6 ч 10 мин</div></div>
-<div class="flight"><div class="tag">Обратно · HY514</div><div class="route">Сеул Инчхон → Ташкент</div><div class="meta">12 ноя 10:00 → 13:10 · регистрация закрывается в 09:00 · 7 ч 10 мин</div></div>
-</div>
-<table class="legs"><thead><tr><th>Даты</th><th>Город</th><th>Где жили</th><th>Дальше</th></tr></thead><tbody><tr><td data-k="Даты">28 окт — 2 ноя</td><td data-k="Город">Сеул</td><td data-k="Где жили">Hotel Jak Insadong by Anook, Инсадон · 인사동14길 48</td><td data-k="Дальше">2 ноя KTX 10:58 → Singyeongju, прибытие 13:06</td></tr><tr><td data-k="Даты">2–3 ноя</td><td data-k="Город">Кёнджу</td><td data-k="Где жили">Hwangnamguan Hanok Village (ханок), Хваннам-дон</td><td data-k="Дальше">пешком в соседний гестхаус</td></tr><tr><td data-k="Даты">3–4 ноя</td><td data-k="Город">Кёнджу</td><td data-k="Где жили">Soseoljae Guesthouse · 포석로1050번길 48</td><td data-k="Дальше">4 ноя автобус до Ульсана, около 45 минут</td></tr><tr><td data-k="Даты">4–5 ноя</td><td data-k="Город">Ульсан</td><td data-k="Где жили">Ulsan City Hotel, Самсан-ро · 삼산로 246</td><td data-k="Дальше">5 ноя автобус до Хэундэ, около 55 минут</td></tr><tr><td data-k="Даты">5–10 ноя</td><td data-k="Город">Пусан</td><td data-k="Где жили">W Residence Hotel, Хэундэ · 해운대로 620</td><td data-k="Дальше">10 ноя KTX 12:34 → Сеул, прибытие 15:00</td></tr><tr><td data-k="Даты">10–11 ноя</td><td data-k="Город">Сеул</td><td data-k="Где жили">Hotel Poco Seongsu · 성수이로 96</td><td data-k="Дальше">метро и AREX до станции Ёнджон, затем такси</td></tr><tr><td data-k="Даты">11–12 ноя</td><td data-k="Город">Инчхон</td><td data-k="Где жили">Grand Blue Hotel &amp; Residence, Ёнджон · 인천 영종구 자연대로 28</td><td data-k="Дальше">такси до терминала 1, 15–20 минут</td></tr></tbody></table>
-<p class="notes-more">Подробные маршруты на каждый день — в блоках «Как планировали» под каждым днём.</p>
-</details>
-</section>
 <footer>Фото: Сергей и Ирина, октябрь–ноябрь 2026. Впечатления — по заметкам Сергея и Ирины из поездки.</footer>
 </div>
 <dialog aria-label="Фото на весь экран" class="lightbox" id="lightbox"><button aria-label="Закрыть" class="lb-close" type="button">×</button><button aria-label="Предыдущее фото" class="lb-nav lb-prev" type="button">‹</button><button aria-label="Следующее фото" class="lb-nav lb-next" type="button">›</button><p class="lb-cap"></p></dialog><script src="assets/photos/photos.js"></script><script>
 // Renders day strips and city galleries from window.TRIP_PHOTOS, fills the counters, highlights the current section and runs the fullscreen viewer.
 (function () {
   var data = window.TRIP_PHOTOS || {};
+  var allData = window.TRIP_ALL_PHOTOS || data;
 
   function ref(city, i) { return { city: city, i: i, p: (data[city] || [])[i] }; }
   var all = [];
@@ -518,12 +481,12 @@ details.notes .flights { margin: 0; padding: 0 20px; }
     return b;
   }
 
-  // Galleries: one per city; data-from / data-to split Seoul into the first visit and the last days
+  // Galleries: one per city, with every photo from the city folder; data-from / data-to split Seoul into the first visit and the last days
   var galleries = {};
   document.querySelectorAll('.gallery[data-city]').forEach(function (g) {
     var city = g.dataset.city, from = g.dataset.from || '', to = g.dataset.to || '9999';
     var box = g.closest('details');
-    var refs = (data[city] || []).map(function (p, i) { return ref(city, i); }).filter(function (r) {
+    var refs = (allData[city] || []).map(function (p, i) { return { city: city, i: i, p: p }; }).filter(function (r) {
       var d = r.p.day || '';
       return d >= from && d <= to;
     });

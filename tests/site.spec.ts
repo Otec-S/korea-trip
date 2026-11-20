@@ -7,13 +7,18 @@ async function manifest(page: Page): Promise<Record<string, unknown[]>> {
   return page.evaluate(() => (window as any).TRIP_PHOTOS);
 }
 
+// Every photo from the city folders (window.TRIP_ALL_PHOTOS) goes to the "all photos" galleries
+async function allPhotos(page: Page): Promise<Record<string, unknown[]>> {
+  return page.evaluate(() => (window as any).TRIP_ALL_PHOTOS);
+}
+
 test.describe("trip report", () => {
   test.beforeEach(async ({ page }) => {
     await page.goto("/");
   });
 
-  test("each city has its own gallery with every selected photo", async ({ page }) => {
-    const data = await manifest(page);
+  test("each city has its own gallery with every photo from the city folder", async ({ page }) => {
+    const data = await allPhotos(page);
     for (const city of CITIES) {
       // Seoul photos are split between the first visit and the last days (#finish)
       const imgs = page.locator(`.gallery[data-city="${city}"] img`);
@@ -58,16 +63,6 @@ test.describe("trip report", () => {
     const teaserTop = await teaser.evaluate((e) => e.getBoundingClientRect().top + scrollY);
     const seoulTop = await page.locator("#seoul").evaluate((e) => e.getBoundingClientRect().top + scrollY);
     expect(teaserTop).toBeLessThan(seoulTop);
-  });
-
-  test("logistics live in one collapsed block, not in the story", async ({ page }) => {
-    const notes = page.locator("#trip-notes details");
-    await expect(notes).toHaveCount(1);
-    expect(await notes.evaluate((e) => (e as HTMLDetailsElement).open)).toBe(false);
-    await expect(notes).toContainText("HY511");
-    await expect(notes).toContainText("Hotel Jak Insadong");
-    await expect(page.locator(".flight:not(#trip-notes .flight)")).toHaveCount(0);
-    await expect(page.locator(".stay, .db .night")).toHaveCount(0);
   });
 
   test("'more' button opens the whole day in the viewer and stays inside that day", async ({ page }) => {

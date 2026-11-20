@@ -33,6 +33,7 @@ ROOT = Path(__file__).resolve().parent.parent
 WORK = ROOT / ".work"
 OUT = ROOT / "assets" / "photos"
 SELECTION = ROOT / "tools" / "selection.json"
+CAPTIONS = ROOT / "tools" / "captions.json"  # captions for photos that are not in selection.json
 
 # Folder name on disk -> slug used on the site
 CITIES = {"Сеул": "seoul", "Кёнджу": "gyeongju", "Ульсан": "ulsan", "Пусан": "busan"}
@@ -44,6 +45,9 @@ STAYS = {
     "ulsan": [("2026-11-04", "2026-11-05")],
     "busan": [("2026-11-05", "2026-11-10")],
 }
+
+# Photos taken after this moment but filed in the first city's folder belong to the second city
+MISFILED = {"busan": ("seoul", "2026-11-10T14:00:00")}
 
 PHOTO_EXT = {".jpg", ".jpeg", ".heic", ".png"}
 FULL_PX = 1600
@@ -170,54 +174,89 @@ def cmd_sheets(args):
         )
 
 
+def publish(img, when, slug, name, caption, day, force):
+    """Write full and thumb copies of one photo and return its manifest entry."""
+    dest = OUT / slug
+    stem = Path(name).stem.lower()
+    for px, suffix, q in ((FULL_PX, "", 80), (THUMB_PX, "-t", 72)):
+        copy = img.copy()
+        copy.thumbnail((px, px), Image.LANCZOS)
+        target = dest / f"{stem}{suffix}.webp"
+        if not target.exists() or force:
+            # a fresh save without exif= drops all metadata, GPS included
+            copy.convert("RGB").save(target, "WEBP", quality=q, method=6)
+    full = Image.open(dest / f"{stem}.webp")
+    return {
+        "src": f"assets/photos/{slug}/{stem}.webp",
+        "thumb": f"assets/photos/{slug}/{stem}-t.webp",
+        "w": full.width,
+        "h": full.height,
+        "time": when.isoformat() if when else None,
+        "caption": caption,
+        "day": day or (when.date().isoformat() if when else None),
+    }
+
+
 def cmd_build(args):
     src_root = Path(args.src_root)
     selection = json.loads(SELECTION.read_text("utf-8"))
-    inventory = json.loads((WORK / "inventory.json").read_text("utf-8"))
-    manifest = {}
+    captions = json.loads(CAPTIONS.read_text("utf-8"))
+    manifest = {}  # hand-picked photos: day strips, covers, counters
+    # a photo picked for one city (possibly via "from") must not reappear in another city's gallery
+    picked = {Path(e["file"]).stem.lower() for v in selection.values() for e in v}
+    late = {}  # photos moved here from another city's folder
+    everything = {}  # every photo from the city folders: "all photos" galleries
     for folder, slug in CITIES.items():
-        dest = OUT / slug
-        dest.mkdir(parents=True, exist_ok=True)
+        (OUT / slug).mkdir(parents=True, exist_ok=True)
         items = []
+        seen = set()
         for entry in selection.get(slug, []):
             name = entry["file"]
             # "from" covers photos that ended up in another city's folder
             img, when, _ = open_upright(src_root / entry.get("from", folder) / name)
-            stem = Path(name).stem.lower()
-            for px, suffix, q in ((FULL_PX, "", 80), (THUMB_PX, "-t", 72)):
-                copy = img.copy()
-                copy.thumbnail((px, px), Image.LANCZOS)
-                target = dest / f"{stem}{suffix}.webp"
-                if not target.exists() or args.force:
-                    # a fresh save without exif= drops all metadata, GPS included
-                    copy.convert("RGB").save(target, "WEBP", quality=q, method=6)
-            full = Image.open(dest / f"{stem}.webp")
-            items.append(
-                {
-                    "src": f"assets/photos/{slug}/{stem}.webp",
-                    "thumb": f"assets/photos/{slug}/{stem}-t.webp",
-                    "w": full.width,
-                    "h": full.height,
-                    "time": when.isoformat() if when else None,
-                    "caption": entry.get("caption", ""),
-                    "day": entry.get("day") or (when.date().isoformat() if when else None),
-                }
-            )
+            items.append(publish(img, when, slug, name, entry.get("caption", ""), entry.get("day"), args.force))
+            seen.add(Path(name).stem.lower())
         items.sort(key=lambda x: x["time"] or "")
         manifest[slug] = items
-        print(slug, len(items), "photos")
+        rest = []
+        moved = {}  # photos filed in this city's folder that belong to another city
+        for p in sorted(q for q in (src_root / folder).iterdir() if q.suffix.lower() in PHOTO_EXT):
+            if p.stem.lower() in seen or p.stem.lower() in picked:
+                continue
+            try:
+                img, when, _ = open_upright(p)
+            except Exception as e:
+                print("skipped", slug, p.name, e)
+                continue
+            target, since = MISFILED.get(slug, (slug, ""))
+            if when and when.isoformat() >= since and target != slug:
+                moved.setdefault(target, []).append((img, when, p.name))
+                continue
+            rest.append(publish(img, when, slug, p.name, captions.get(p.name, ""), None, args.force))
+        for target, rows in moved.items():
+            for img, when, name in rows:
+                (OUT / target).mkdir(parents=True, exist_ok=True)
+                late.setdefault(target, []).append(publish(img, when, target, name, captions.get(name, ""), None, args.force))
+        everything[slug] = sorted(items + rest, key=lambda x: (x["time"] or "", x["src"]))
+    for target, rows in late.items():
+        everything[target] = sorted(everything[target] + rows, key=lambda x: (x["time"] or "", x["src"]))
+    for slug, rows in everything.items():
+        print(slug, len(manifest[slug]), "selected,", len(rows), "total")
     (OUT / "photos.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=1), "utf-8")
     # also as a script so the page works when opened straight from disk (file://)
     (OUT / "photos.js").write_text(
-        "window.TRIP_PHOTOS = " + json.dumps(manifest, ensure_ascii=False) + ";\n", "utf-8"
+        "window.TRIP_PHOTOS = " + json.dumps(manifest, ensure_ascii=False) + ";\n"
+        "window.TRIP_ALL_PHOTOS = " + json.dumps(everything, ensure_ascii=False) + ";\n",
+        "utf-8",
     )
+    used = {i[k] for v in everything.values() for i in v for k in ("src", "thumb")}
     unused = sorted(
         p.relative_to(ROOT).as_posix()
         for p in OUT.rglob("*.webp")
-        if not any(p.relative_to(ROOT).as_posix() in (i["src"], i["thumb"]) for v in manifest.values() for i in v)
+        if p.relative_to(ROOT).as_posix() not in used
     )
     if unused:
-        print("not in selection (safe to delete):", *unused, sep="\n  ")
+        print("not published (safe to delete):", *unused, sep="\n  ")
 
 
 def cmd_check(args):
