@@ -162,6 +162,16 @@ test.describe("trip report", () => {
   });
 });
 
+test("every photo has a 960 px copy for phones", async ({ page }) => {
+  await page.goto("/");
+  const all = (await allPhotos(page)) as Record<string, { mid: string }[]>;
+  for (const city of CITIES) {
+    for (const p of all[city]) {
+      expect(p.mid, city).toMatch(/-m\.webp$/);
+    }
+  }
+});
+
 test("no console errors or broken local requests", async ({ page }) => {
   const problems: string[] = [];
   page.on("console", (m) => {
@@ -195,6 +205,10 @@ test.describe("mobile", () => {
   });
 });
 
+function stemOf(src: string): string {
+  return src.slice(src.lastIndexOf("/") + 1).replace(/\.webp$/, "");
+}
+
 // Real finger gestures on a phone: CDP touch events go through the browser's own scrolling and click logic
 test.describe("mobile viewer", () => {
   test.use({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
@@ -212,13 +226,27 @@ test.describe("mobile viewer", () => {
     await page.waitForTimeout(300);
   }
 
+  test("on a wide screen the viewer loads the full-size copy", async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 800 });
+    await page.goto("/");
+    await page.locator('.day[data-date="2026-10-29"] .day-photos button.zoom').first().click();
+    await expect(page.locator(".lightbox img")).toHaveAttribute("src", /(?<!-[mt])\.webp$/);
+  });
+
+  test("on a phone the viewer loads the 960 px copy", async ({ page }) => {
+    await page.goto("/");
+    await page.locator('.day[data-date="2026-10-29"] .day-photos button.zoom').first().tap();
+    await expect(page.locator(".lightbox img")).toHaveAttribute("src", /-m\.webp$/);
+  });
+
   test("big city photo opens the same photo in the viewer", async ({ page }) => {
     await page.goto("/");
     for (const city of CITIES) {
       const btn = page.locator(`#${city} .scene button.zoom`);
-      const src = await btn.locator("img").getAttribute("src");
+      const stem = stemOf((await btn.locator("img").getAttribute("src"))!);
       await btn.tap();
-      await expect(page.locator(".lightbox img")).toHaveAttribute("src", src!);
+      // the viewer shows the same photo, in the 960 px copy on a phone
+      await expect(page.locator(".lightbox img")).toHaveAttribute("src", new RegExp(`${stem}(-m)?\\.webp$`));
       await page.keyboard.press("Escape");
     }
   });
@@ -256,7 +284,7 @@ test.describe("mobile viewer", () => {
       return (window as any).TRIP_PHOTOS[b.dataset.city!][Number(b.dataset.i)].src;
     }, await target.elementHandle());
     await target.tap();
-    await expect(page.locator(".lightbox img")).toHaveAttribute("src", want);
+    await expect(page.locator(".lightbox img")).toHaveAttribute("src", new RegExp(`${stemOf(want)}(-m)?\\.webp$`));
   });
 
   test("on a slow network the viewer never shows the previous photo", async ({ page }) => {
@@ -303,7 +331,7 @@ test.describe("mobile viewer", () => {
     await expect(imgs).toHaveCount(4);
     for (const img of await imgs.all()) {
       await expect(img).toHaveAttribute("loading", "lazy");
-      await expect(img).toHaveAttribute("srcset", /-t\.webp 480w/);
+      await expect(img).toHaveAttribute("srcset", /-t\.webp 480w, .*-m\.webp 960w, .*[^m]\.webp 1600w/);
       await expect(img).toHaveAttribute("sizes", /.+/);
     }
   });

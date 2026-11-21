@@ -5,7 +5,8 @@ Originals stay outside the repo (one folder per city). This script:
   index  - reads every photo, extracts capture time and quality hints,
            writes .work/inventory.json and per-city contact sheets
   build  - takes tools/selection.json and writes web-ready copies to
-           assets/photos/<city>/ plus assets/photos/photos.json
+           assets/photos/<city>/ (full 1600 px, phone 960 px, thumb 480 px)
+           plus assets/photos/photos.json
   check  - fails if any published image still carries metadata (GPS, EXIF)
 
 Usage:
@@ -51,6 +52,7 @@ MISFILED = {"busan": ("seoul", "2026-11-10T14:00:00")}
 
 PHOTO_EXT = {".jpg", ".jpeg", ".heic", ".png"}
 FULL_PX = 1600
+MOBILE_PX = 960  # for phones and small windows: about a third of the full size
 THUMB_PX = 480
 TAG_DATETIME_ORIGINAL = 36867
 TAG_EXIF_IFD = 0x8769
@@ -178,7 +180,7 @@ def publish(img, when, slug, name, caption, day, force):
     """Write full and thumb copies of one photo and return its manifest entry."""
     dest = OUT / slug
     stem = Path(name).stem.lower()
-    for px, suffix, q in ((FULL_PX, "", 80), (THUMB_PX, "-t", 72)):
+    for px, suffix, q in ((FULL_PX, "", 80), (MOBILE_PX, "-m", 76), (THUMB_PX, "-t", 72)):
         copy = img.copy()
         copy.thumbnail((px, px), Image.LANCZOS)
         target = dest / f"{stem}{suffix}.webp"
@@ -188,6 +190,7 @@ def publish(img, when, slug, name, caption, day, force):
     full = Image.open(dest / f"{stem}.webp")
     return {
         "src": f"assets/photos/{slug}/{stem}.webp",
+        "mid": f"assets/photos/{slug}/{stem}-m.webp",
         "thumb": f"assets/photos/{slug}/{stem}-t.webp",
         "w": full.width,
         "h": full.height,
@@ -249,7 +252,7 @@ def cmd_build(args):
         "window.TRIP_ALL_PHOTOS = " + json.dumps(everything, ensure_ascii=False) + ";\n",
         "utf-8",
     )
-    used = {i[k] for v in everything.values() for i in v for k in ("src", "thumb")}
+    used = {i[k] for v in everything.values() for i in v for k in ("src", "mid", "thumb")}
     unused = sorted(
         p.relative_to(ROOT).as_posix()
         for p in OUT.rglob("*.webp")
